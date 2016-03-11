@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% load static %} <!-- New line -->
+
+<html>
+
+    <head>
+        <title>Welcome to Ehealth</title>
+        <link rel="stylesheet" href="{% static "css/style.css" %}" /> <!-- CSS -->
+        <script src="{% static "js/script.js" %}"></script> <!-- JavaScript -->
+    </head>
+    </head>
+
+    <body>
+        <h1>Ehealth says...</h1>
+        hello world! <strong>{{ boldmessage }}</strong><br />
+        <a href="/ehealth_app/about/">About</a><br />
+        <img src="{% static "images/pigeon.jpg" %}" style="width: 50%; height: 50%;" alt="Picture of Rango" /> <!-- New line -->
+    </body>
+
+</html>
