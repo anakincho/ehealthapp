@@ -7,62 +7,46 @@ django.setup()
 
 from ehealth_app.models import Category, Page
 
-
+#Populating function
+#All the data created from here is for testing purposes!
 def populate():
 
+    diabetes_cat = add_cat('Diabetes', 'testUser') #creates a category with name Diabetes, by the user testUser
+    # Adds a page to our Diabetes category with all the fields
+    add_page(cat                = diabetes_cat,
+             title              = 'Preventing Diabetes: Questions for the doctor',
+             url                = 'http://healthfinder.gov/HealthTopics/Category/doctor-visits/talking-with-the-doctor/preventing-diabetes-questions-for-the-doctor',
+             flesch_score       = 12.5,
+             polarity_score     = 10.2,
+             subjectivity_score = 13.6
+    )
 
-    # python_cat = add_cat('Python')
-    #
-    # add_page(cat=python_cat,
-    #     title="Official Python Tutorial",
-    #     url="http://docs.python.org/2/tutorial/")
-    #
-    # add_page(cat=python_cat,
-    #     title="How to Think like a Computer Scientist",
-    #     url="http://www.greenteapress.com/thinkpython/")
-    #
-    # add_page(cat=python_cat,
-    #     title="Learn Python in 10 Minutes",
-    #     url="http://www.korokithakis.net/tutorials/python/")
-    #
-    # django_cat = add_cat("Django")
-    #
-    # add_page(cat=django_cat,
-    #     title="Official Django Tutorial",
-    #     url="https://docs.djangoproject.com/en/1.5/intro/tutorial01/")
-    #
-    # add_page(cat=django_cat,
-    #     title="Django Rocks",
-    #     url="http://www.djangorocks.com/")
-    #
-    # add_page(cat=django_cat,
-    #     title="How to Tango with Django",
-    #     url="http://www.tangowithdjango.com/")
-    #
-    # frame_cat = add_cat("Other Frameworks")
-    #
-    # add_page(cat=frame_cat,
-    #     title="Bottle",
-    #     url="http://bottlepy.org/docs/dev/")
-    #
-    # add_page(cat=frame_cat,
-    #     title="Flask",
-    #     url="http://flask.pocoo.org")
+    flu_cat = add_cat('Flu', 'testUser') #creates a category with name Flu, by the user testUser
+    #adds a page to our Flu category with all the fields
+    add_page(cat                = flu_cat,
+             title              = 'Prepare for a Flu Pandemic',
+             url                = 'http://healthfinder.gov/HealthTopics/Category/everyday-healthy-living/safety/prepare-for-a-flu-pandemic',
+             flesch_score       = 8.3,
+             polarity_score     = 7.4,
+             subjectivity_score = 10.8
+    )
 
     # Print out what we have added to the user.
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
             print "- {0} - {1}".format(str(c), str(p))
 
-def add_page(cat, title, url, views=0):
+def add_page(cat, title, url, flesch_score, polarity_score, subjectivity_score):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url=url
-    p.views=views
+    p.flesch_score = flesch_score
+    p.polarity_score = polarity_score
+    p.subjectivity_score = subjectivity_score
     p.save()
     return p
 
-def add_cat(name):
-    c = Category.objects.get_or_create(name=name)[0]
+def add_cat(name, user):
+    c = Category.objects.get_or_create(name=name, user=user)[0]
     return c
 
 # Start execution here!
