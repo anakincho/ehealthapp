@@ -1,29 +1,23 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-{% load static %} <!-- New line -->
+{% load staticfiles %}
 
-<html>
+{% block title %}Home{% endblock %}
 
-    <head>
-        <title>Welcome to Ehealth</title>
-        <link rel="stylesheet" href="{% static "css/style.css" %}" /> <!-- CSS -->
-        <script src="{% static "js/script.js" %}"></script> <!-- JavaScript -->
-    </head>
-    </head>
-
-    <body>
+{% block body_block %}
         <h1>Ehealth has...</h1>
         {% if categories %}
             <ul>
                 {% for category in categories %}
-                <li><a href="/ehealth_app/category/{{ category.slug }}">{{ category.name }}</a></li>
+                <li><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
             <strong>There are no categories present.</strong>
         {% endif %}
-        <a href="/ehealth_app/about/">About</a><br />
-        <img src="{% static "images/pigeon.jpg" %}" style="width: 50%; height: 50%;" alt="Picture of Rango" /> <!-- New line -->
-    </body>
 
-</html>
+        <a href="{% url 'add_category' %}">Add a New Category</a><br />
+
+        <a href="{% url 'about' %}">About</a><br />
+        <img src="{% static "images/pigeon.jpg" %}" style="width: 50%; height: 50%;" alt="Picture of Rango" /> <!-- New line -->
+{% endblock %}

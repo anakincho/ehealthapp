@@ -3,6 +3,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from ehealth_app.models import Category, Page
+from ehealth_app.forms import CategoryForm
+from datetime import datetime
 
 #view for the index page
 def index(request):
@@ -15,17 +17,51 @@ def index(request):
     context_dict = {'boldmessage': "I am bold font from the context"}
     context_dict['categories'] = category_list
 
+    visits = request.session.get('visits')
+    if not visits:
+        visits = 1
+    reset_last_visit_time = False
+
+    last_visit = request.session.get('last_visit')
+    if last_visit:
+        last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+
+        if (datetime.now() - last_visit_time).seconds > 0:
+            # ...reassign the value of the cookie to +1 of what it was before...
+            visits = visits + 1
+            # ...and update the last visit cookie, too.
+            reset_last_visit_time = True
+    else:
+        # Cookie last_visit doesn't exist, so create it to the current date/time.
+        reset_last_visit_time = True
+
+    if reset_last_visit_time:
+        request.session['last_visit'] = str(datetime.now())
+        request.session['visits'] = visits
+    context_dict['visits'] = visits
+
+
+    response = render(request,'ehealth_app/index.html', context_dict)
+
+    return response
+
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
 
-    return render(request, 'ehealth_app/index.html', context_dict)
 
 #view for the about page
 def about(request):
     context_dict = {'content': "Some random string"}
+    if request.session.get('visits'):
+        count = request.session.get('visits')
+    else:
+        count = 0
 
-    return render(request, 'ehealth_app/about.html', context_dict)
+# remember to include the visit data
+    return render(request, 'ehealth_app/about.html', {'visits': count})
+
+    #return render(request, 'ehealth_app/about.html', context_dict)
 
 def category(request, category_name_slug):
 
@@ -55,3 +91,28 @@ def category(request, category_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'ehealth_app/categories.html', context_dict)
+
+
+
+def add_category(request):
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            form.save(commit=True)
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return index(request)
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print form.errors
+    else:
+        # If the request was not a POST, display the form to enter details.
+        form = CategoryForm()
+
+    # Render the form with error messages (if any).
+    return render(request, 'ehealth_app/add_category.html', {'form': form})
