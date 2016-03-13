@@ -2,22 +2,69 @@
 
 {% load staticfiles %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Index{% endblock %}
 
-{% block body_block %}
-        <h1>Ehealth has...</h1>
-        {% if categories %}
-            <ul>
-                {% for category in categories %}
-                <li><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ul>
+{% block side_block %}
+{% if categories %}
+        <ul class="list-group">
+            {% for category in categories %}
+            {% if category.shared %} <!--If the creator of the category has shared that category-->
+                <li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+            {% else %}
+            {% if category.user == user.username %} <!--This is used in order to show all the cats created by the current user-->
+                <li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
         {% else %}
-            <strong>There are no categories present.</strong>
+        <strong>There are no categories present.</strong>
         {% endif %}
 
-        <a href="{% url 'add_category' %}">Add a New Category</a><br />
+{% endblock %}
 
-        <a href="{% url 'about' %}">About</a><br />
-        <img src="{% static "images/pigeon.jpg" %}" style="width: 50%; height: 50%;" alt="Picture of Rango" /> <!-- New line -->
+{% block body_block %}
+{% if user.is_authenticated %}
+<div class="page-header">
+
+    <h1>Hello {{ user.username }}!</h1>
+    {% else %}
+    <h1>Welcome</h1>
+    {% endif %}
+</div>
+
+<div class="row placeholders">
+    <div class="col-xs-12 col-sm-6 placeholder">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Categories</h3>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="col-xs-12 col-sm-6 placeholder">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                    <h3 class="panel-title">Pages</h3>
+            </div>
+    </div>
+
+        {% if pages %}
+        <ul class="list-group">
+            {% for page in pages %}
+            <li class="list-group-item"><a href="{{page.url}}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>There are no categories present.</strong>
+        {% endif %}
+    </div>
+
+</div>
+
+
+<p> visits: {{ visits }}</p>
 {% endblock %}

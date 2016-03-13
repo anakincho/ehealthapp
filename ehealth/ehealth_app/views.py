@@ -68,6 +68,11 @@ def category(request, category_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
+    # Get the username of the currently logged user
+    # in order to return the appropriate pages for the requested category
+    if request.user.is_authenticated():
+        username = request.user.username
+
     try:
         # Can we find a category name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
@@ -79,8 +84,21 @@ def category(request, category_name_slug):
         # Note that filter returns >= 1 model instance.
         pages = Page.objects.filter(category=category)
 
-        # Adds our results list to the template context under name pages.
-        context_dict['pages'] = pages
+
+        newPages = []
+        # if the user has no saved pages, and there are not any shared pages for the given category,
+        # this will help us return 0 pages(easier to implement in the template when no pages are returned)
+        # otherwise this will return the pages either saved by the user or all the shared pages for this category
+        for page in pages:
+            if page.shared:
+                newPages.append(page)
+            elif page.user == username:
+                newPages.append(page)
+
+
+        # Adding our filtered pages to the context dictionary
+        context_dict['pages'] = newPages
+
         # We also add the category object from the database to the context dictionary.
         # We'll use this in the template to verify that the category exists.
         context_dict['category'] = category

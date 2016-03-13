@@ -5,11 +5,12 @@
 {% block title %}About{% endblock %}
 
 {% block body_block %}
-        <h1>About page</h1>
-        <p>{{ content }}</p>
-        <a href="/ehealth_app/">Home</a><br />
-        {% if visits %}
-            <p>{{visits}}</p>
-        {% endif %}
-        <img src="{% static "images/pigeon.jpg" %}" style="width: 50%; height: 50%;" alt="Picture of Rango" /> <!-- New line -->
+    <div class="page-header">
+                <h1>About</h1>
+            </div>
+            <div>
+            <p></strong>Welcome to Ehealth, where we provide the "best" search engine for health!</p>
+
+            <img  width="90" height="100" src="{% static "images/pigeon.jpg" %}" alt="Picture of Pigeon" /> <!-- New line -->
+            </div>
 {% endblock %}

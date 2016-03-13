@@ -8,18 +8,21 @@
     <h1>{{ category_name }}</h1>
     {% if category %}
         {% if pages %}
-        <ul>
+        <ul class="list-group">
                 {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                    {% if page.shared %}
+                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></br><a style="color:green;" href ="{{ page.url }}">{{ page.url }}</a></li>
+                    {% else %}
+                    {% if page.user == user.username %}
+                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></br><a style="color:green;" href ="{{ page.url }}">{{ page.url }}</a></li>
+                    {% endif %}
+                    {% endif %}
                 {% endfor %}
                 </ul>
         {% else %}
                 <strong>No pages currently in category.</strong>
                 {% endif %}
 
-        {% if user.is_authenticated %}
-
-                {% endif %}
         {% else %}
                  The specified category {{ category_name }} does not exist!
     {% endif %}
