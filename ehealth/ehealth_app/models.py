@@ -24,8 +24,7 @@ class Category(models.Model):
 class Page(models.Model):
 
     #fields for the table
-    user = models.CharField(max_length=128, unique= False) #We need this in order to show the non shared pages(from the current user)
-                                                                                                                # to the current user
+    user = models.CharField(max_length=128, unique= False) #We need this in order to show the non shared pages(from the current user)                                                                                                           # to the current user
     category = models.ForeignKey(Category)
     title = models.CharField(max_length=128)
     url = models.URLField()

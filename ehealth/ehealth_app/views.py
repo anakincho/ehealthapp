@@ -10,8 +10,8 @@ from datetime import datetime
 def index(request):
 
     #fetching our categories from the database and ordering them by name
-    #note we are fetching only 5 of them!
-    category_list = Category.objects.order_by('name')[:5]
+
+    category_list = Category.objects.order_by('name')
 
     #creating the context dictionary that we can use on our index template to show information for example from the DB
     context_dict = {'boldmessage': "I am bold font from the context"}
@@ -102,6 +102,7 @@ def category(request, category_name_slug):
         # We also add the category object from the database to the context dictionary.
         # We'll use this in the template to verify that the category exists.
         context_dict['category'] = category
+        print category
     except Category.DoesNotExist:
         # We get here if we didn't find the specified category.
         # Don't do anything - the template displays the "no category" message for us.
@@ -113,14 +114,24 @@ def category(request, category_name_slug):
 
 
 def add_category(request):
+
+    # In order to record which user has created the category!
+    if request.user.is_authenticated():
+        username = request.user.username
+
     # A HTTP POST?
     if request.method == 'POST':
         form = CategoryForm(request.POST)
 
+        #print form.name
+        #print form
         # Have we been provided with a valid form?
         if form.is_valid():
+            note = form.save(commit=True)
+            print note.name
+            note.user = username
             # Save the new category to the database.
-            form.save(commit=True)
+            note.save()
 
             # Now call the index() view.
             # The user will be shown the homepage.
