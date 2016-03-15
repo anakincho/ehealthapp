@@ -14,7 +14,7 @@
                 {{ hidden }}
             {% endfor %}
 
-            {% for field in form.visible_fields %}
+            {% for field in form.visible_fields %} <!--For Carly, use the registration or login profile as reference on how to do this-->
                 {{ field.errors }}
                 {{ field.help_text }}
                 {{ field }}
@@ -23,6 +23,4 @@
             <input type="submit" name="submit" value="Create Category" />
         </form>
 {% endblock %}
-<tr><th><label for="id_name">Name:</label></th><td><input id="id_name" maxlength="128" name="name" type="text" value="dd334443" /><br /><span class="helptext">Please enter the category name.</span></td></tr>
 
-<tr><th><label for="id_shared">Shared:</label></th><td><input id="id_shared" name="shared" type="checkbox" /><br /><span class="helptext">Would you like this category to be viewed by other users?</span><input id="id_slug" name="slug" type="hidden" /></td></tr>

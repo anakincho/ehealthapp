@@ -5,3 +5,22 @@ IMPORTANT NOTE!!!! when installing requirements, ESPECIALLY DJANGO-REGISTRATION-
 install version 1.2
 
 command: pip install -U django-registration-redux==1.2
+
+For TeamMembers: 
+	When you pull the project and start working on it, make sure you have this pip list installed:
+	(ehealth) E:\programirane\WAD\ehealth>pip freeze
+	Django==1.7
+	django-bootstrap-toolkit==2.15.0
+	django-registration-redux==1.2
+	Pillow==3.1.1
+	IMPORTANT to have the same versions, otherwise django is mean and crashes.
+
+So far implemented by Niki:
+	- Models (Categories, Pages) added all fields
+	- Made Categories, Pages sharable (a user can choose if a category/page is to be shared or no)
+	- Views 
+	- Urls
+	- Forms
+	- Bootstrap beginning
+	- User profiles (a user can set up their profile, including profile pic and website, also important thing is that the implementation allows the user to edit his profile!)
+	- It is 2 a.m so I am not sure what else but I am sure I am missing half the stuff

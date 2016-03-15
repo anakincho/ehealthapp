@@ -1,5 +1,8 @@
 from django.contrib import admin
 from ehealth_app.models import Category, Page
+from ehealth_app.models import UserProfile
+
+
 
 # Used to customize the admin panel
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,6 +15,6 @@ class PageAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
-
+admin.site.register(UserProfile)
 
 

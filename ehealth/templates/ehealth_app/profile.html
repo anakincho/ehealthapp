@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+<form id="user_form" method="post" action="/ehealth_app/profile/"
+      enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <div class="col-xs-4">
+        {% if user.userprofile.website %}
+        <input class="form-control" placeholder="Enter Website" id="id_website" maxlength="254"
+               value="{{ user.userprofile.website }}" name="website" type="text"/>
+        {% else %}
+        <input class="form-control" placeholder="Enter Website" id="id_website" maxlength="254"
+               value="{{ user.userprofile.website }}" name="website" type="text"/>
+        {% endif %}
+        </br>
+        <label class="btn btn-primary" for="id_picture">
+            <input id="id_picture" name="picture" type="file" onchange='$("#upload-file-info").html($(this).val());'
+                   style="display:none;">
+            {% if user.userprofile.picture %}
+            Change profile picture
+            {% else %}
+            Add profile picture
+            {% endif %}
+        </label>
+        &nbsp;
+        <span class='label label-info' id="upload-file-info"></span>
+        </br>
+        </br>
+        <input type="submit" class="btn btn-success" name="submit" value="submit"/>
+    </div>
+
+</form>
+{% endblock %}

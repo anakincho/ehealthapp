@@ -1,3 +1,14 @@
 body{
     font-family: "Comic Sans MS";
 }
+#logo{
+    font-family: "Courier";
+    color: green;
+}
+#profilePic {
+    height: 50px;
+}
+.navbar-brand
+    {
+        padding-top: 0;
+    }

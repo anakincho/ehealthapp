@@ -2,9 +2,10 @@
 #Imports of modules
 from django.http import HttpResponse
 from django.shortcuts import render
-from ehealth_app.models import Category, Page
-from ehealth_app.forms import CategoryForm
+from ehealth_app.models import Category, Page, UserProfile
+from ehealth_app.forms import CategoryForm, UserProfileForm
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 #view for the index page
 def index(request):
@@ -123,8 +124,6 @@ def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
 
-        #print form.name
-        #print form
         # Have we been provided with a valid form?
         if form.is_valid():
             note = form.save(commit=True)
@@ -145,3 +144,55 @@ def add_category(request):
 
     # Render the form with error messages (if any).
     return render(request, 'ehealth_app/add_category.html', {'form': form})
+
+@login_required
+def profile(request):
+
+    # Get the username of the currently logged in user
+    if request.user.is_authenticated():
+        user = request.user
+
+    # If it's a HTTP POST, we're interested in processing form data.
+    if request.method == 'POST':
+        # Attempt to grab information from the raw form information.
+        profile_form = UserProfileForm(data=request.POST)
+
+        # If the two forms are valid...
+        if profile_form.is_valid():
+
+            # Now sort out the UserProfile instance.
+            # Since we need to set the user attribute ourselves, we set commit=False.
+            # This delays saving the model until we're ready to avoid integrity problems.
+            if UserProfile.objects.filter(user=user).count() == 0: # if no userProfile exists, we create one
+                profile = profile_form.save(commit=False)
+                profile.user = user
+            else: # otherwise we fetch the existing one and alter its fields
+                profile = UserProfile.objects.get(user=user)
+
+            profile.website = request.POST['website']
+
+            # Did the user provide a profile picture?
+            # If so, we need to get it from the input form and put it in the UserProfile model.
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            # Now we save the UserProfile model instance.
+            profile.save()
+            
+            return index(request)
+
+        # Invalid form or forms - mistakes or something else?
+        # Print problems to the terminal.
+        # They'll also be shown to the user.
+        else:
+            print profile_form.errors
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        profile_form = UserProfileForm()
+
+    # Render the template depending on the context.
+    return render(request,
+            'ehealth_app/profile.html',
+            {'profile_form': profile_form} )
