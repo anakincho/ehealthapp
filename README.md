@@ -29,3 +29,10 @@ So far implemented by Niki:
 So far implemented by Carly (2081252C):
 	- updated base to contain categories sidebar and search bar like wireframes
 	- had to edit some views to get this to show but everything appears to be working fine
+	- removed search bar from login and registration pages
+	- used JQuery for registration form validation
+	- Updated about page to contain information about app and team
+	- Put up a terms and conditions page
+	- Still to do:
+		- edit/delete categories
+		- ajax
