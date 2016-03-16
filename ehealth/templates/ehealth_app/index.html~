@@ -62,46 +62,41 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-        {% block side_block %}
-		<div class="panel panel-success">
-        		<div class="panel-heading">
-                		<h3 class="panel-title">Categories</h3>
-                	</div>
-        	</div>
-		{% if categories %}
-        	<ul class="list-group">
-            		{% for category in categories %}
-            			{% if category.shared %} <!--If the creator of the category has shared that category-->
-                		<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
-            			{% else %}
-            				{% if category.user == user.username %} <!--This is used in order to show all the cats created by the current user-->
-                				<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
-            				{% endif %}
-            			{% endif %}
-            		{% endfor %}
-        	</ul>
-        	{% else %}
-       			 <strong>There are no categories present.</strong>
-        	{% endif %}
 
-	{% endblock %}
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div>
-		<div class="col-md-offset-3">
-  			<h1 id="logo" class="col-md-offset-2">Ehealth</h1>
-    			<form class="form">
-        		<div class="form-group">
-            			<div class="col-xs-6">
-                			<input type="text" class="form-control" placeholder="Tell us what's on your mind...">
-            			</div>
-           			<!-- <input type="text" class="input-large search-query" id="query" placeholder="Tell us what's on your mind..."> -->
-        		</div>
-        		<button type="submit" class="btn btn-success">Search</button>
-    			</form>
-		</div>
-                {% block body_block %}{% endblock %}
+                {% block body_block %}
+<div class="page-header">
+    {% if user.is_authenticated %}
+
+            <h4>Hello {{ user.username }}!</h4>
+    {% else %}
+        <h3>Welcome</h3>
+    {% endif %}
+</div>
+
+<div class="col-md-offset-3">
+    <h1 id="logo" class="col-md-offset-2">Ehealth</h1>
+    <form class="form">
+        <div class="form-group">
+            <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="Tell us what's on your mind...">
+            </div>
+           <!-- <input type="text" class="input-large search-query" id="query" placeholder="Tell us what's on your mind..."> -->
+        </div>
+        <button type="submit" class="btn btn-success">Search</button>
+    </form>
+</div>
+
+
+
+
+
+<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5">Ehealth™ <a href="">Terms & Conditions</a></div> <!--Used for footer!-->
+<!-- <footer> visits: {{ visits }}</footer> -->
+{% endblock %}
                 <footer>
 
                 </footer>
@@ -120,3 +115,4 @@
 <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+

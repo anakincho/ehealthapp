@@ -68,9 +68,9 @@
                 		<h3 class="panel-title">Categories</h3>
                 	</div>
         	</div>
-		{% if categories %}
+		{% if category_list %}
         	<ul class="list-group">
-            		{% for category in categories %}
+            		{% for category in category_list %}
             			{% if category.shared %} <!--If the creator of the category has shared that category-->
                 		<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
             			{% else %}
