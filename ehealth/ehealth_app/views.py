@@ -7,12 +7,6 @@ from ehealth_app.forms import CategoryForm, UserProfileForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
-#this is just so categories show up in base sidebar
-def base(request):
-    category_list = Category.objects.order_by('name')
-    context_dict = {'categories': category_list}
-    response = render(request, 'base.html', {'categories': category_list})
-    return response
 
 #view for the index page
 def index(request):

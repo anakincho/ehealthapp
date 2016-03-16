@@ -155,8 +155,14 @@ def add_category(request):
         # If the request was not a POST, display the form to enter details.
         form = CategoryForm()
 
+    context_dict = {}
+
+    #categories for sidebar
+    category_list = Category.objects.order_by('name')
+    context_dict = {'categories': category_list, 'form': form}
+
     # Render the form with error messages (if any).
-    return render(request, 'ehealth_app/add_category.html', {'form': form})
+    return render(request, 'ehealth_app/add_category.html', context_dict)
 
 @login_required
 def profile(request):
@@ -205,7 +211,13 @@ def profile(request):
     else:
         profile_form = UserProfileForm()
 
+    context_dict = {}
+
+    #categories for sidebar
+    category_list = Category.objects.order_by('name')
+    context_dict = {'categories': category_list, 'profile_form': profile_form}
+
     # Render the template depending on the context.
     return render(request,
             'ehealth_app/profile.html',
-            {'profile_form': profile_form} )
+            context_dict)
