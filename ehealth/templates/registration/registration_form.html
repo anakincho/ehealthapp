@@ -15,6 +15,11 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script src=js/sign-up.js></script>
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -100,26 +105,32 @@
     <div class="form-group">
         <p class="required"><label for="id_username">Username:</label>
             <input class="form-control" id="id_username" maxlength="30" name="username" type="text"
-                   placeholder="Enter username"/></p>
+                   placeholder="Enter username" required/></p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_email">E-mail:</label>
-            <input class="form-control" id="id_email" name="email" type="email" placeholder="Enter email"/></p>
+            <input class="form-control" id="id_email" name="email" type="email" placeholder="Enter email" required/></p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_password1">Password:</label>
             <input class="form-control" id="id_password1" name="password1" type="password"
-                   placeholder="Enter password"/></p>
+                   placeholder="Enter password" required/></p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_password2">Password (again):</label>
             <input class="form-control" id="id_password2" name="password2" type="password"
-                   placeholder="Enter password again"/></p>
+                   placeholder="Enter password again" required/></p>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
 
 </form>
+
+
+<script>
+// make fields required
+$( "#regform" ).validate();
+</script>
 
 {% endblock %}
                 <footer>
