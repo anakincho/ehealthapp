@@ -24,3 +24,8 @@ So far implemented by Niki:
 	- Bootstrap beginning
 	- User profiles (a user can set up their profile, including profile pic and website, also important thing is that the implementation allows the user to edit his profile!)
 	- It is 2 a.m so I am not sure what else but I am sure I am missing half the stuff
+	- 
+
+So far implemented by Carly (2081252C):
+	- updated base to contain categories sidebar and search bar like wireframes
+	- had to edit some views to get this to show but everything appears to be working fine
