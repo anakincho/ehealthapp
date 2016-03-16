@@ -61,9 +61,36 @@
 
 <div class="container-fluid">
     <div class="row">
-        
+        <div class="col-sm-3 col-md-2 sidebar">
+        {% block side_block %}
+	{% if categories %}
+		<div class="panel panel-success">
+        		<div class="panel-heading">
+                		<h3 class="panel-title">Categories</h3>
+                	</div>
+        	</div>
+        	<ul class="list-group">
+            		{% for category in categories %}
+            			{% if category.shared %} <!--If the creator of the category has shared that category-->
+                		<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+            			{% else %}
+            				{% if category.user == user.username %} <!--This is used in order to show all the cats created by the current user-->
+                				<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+            				{% endif %}
+            			{% endif %}
+            		{% endfor %}
+        	</ul>
+
+        	{% endif %}
+
+	{% endblock %}
+
+        </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div>
+		
+                {% block body_block %}
+
 
 {% block body_block %}
 <form role="form" method="post" action=".">
@@ -94,8 +121,8 @@
     <button type="submit" class="btn btn-success">Submit</button>
 
 </form>
-{% endblock %}
 
+{% endblock %}
                 <footer>
 
                 </footer>
@@ -114,4 +141,3 @@
 <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
-

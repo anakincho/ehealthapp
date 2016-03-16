@@ -3,7 +3,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from ehealth_app.models import Category, Page, UserProfile
-from ehealth_app.forms import CategoryForm, UserProfileForm
+from ehealth_app.forms import CategoryForm, UserProfileForm, PageForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -215,3 +215,30 @@ def profile(request):
     return render(request,
             'ehealth_app/profile.html',
             context_dict)
+
+#view for adding pages - button next to search result should bring us to an add page template with url and page name already filled in 
+def add_page(request, category_name_slug):
+
+    try:
+        cat = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+                cat = None
+
+    if request.method == 'POST':
+        form = PageForm(request.POST)
+        if form.is_valid():
+            if cat:
+                page = form.save(commit=False)
+                page.category = cat
+                page.views = 0
+                page.save()
+                # probably better to use a redirect here.
+                return category(request, category_name_slug)
+        else:
+            print form.errors
+    else:
+        form = PageForm()
+
+    context_dict = {'form':form, 'category': cat}
+
+    return render(request, 'rango/add_page.html', context_dict)

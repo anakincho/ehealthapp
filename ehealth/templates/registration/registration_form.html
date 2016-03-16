@@ -1,4 +1,94 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Ehealth - {% block title %}The best ehealth search engine.{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/ehealth_app/">Ehealth</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/ehealth_app/">Logout</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                    {% if user.userprofile.picture %}
+                <li><img id="profilePic" src="{{ user.userprofile.picture.url }}"/></li>
+                    {% endif %}
+                {% else %}
+                <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
+                {% endif %}
+
+
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+        {% block side_block %}
+	{% if categories %}
+		<div class="panel panel-success">
+        		<div class="panel-heading">
+                		<h3 class="panel-title">Categories</h3>
+                	</div>
+        	</div>
+        	<ul class="list-group">
+            		{% for category in categories %}
+            			{% if category.shared %} <!--If the creator of the category has shared that category-->
+                		<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+            			{% else %}
+            				{% if category.user == user.username %} <!--This is used in order to show all the cats created by the current user-->
+                				<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+            				{% endif %}
+            			{% endif %}
+            		{% endfor %}
+        	</ul>
+
+        	{% endif %}
+
+	{% endblock %}
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div>
+		
 
 
 {% block body_block %}
@@ -30,4 +120,23 @@
     <button type="submit" class="btn btn-success">Submit</button>
 
 </form>
+
 {% endblock %}
+                <footer>
+
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
