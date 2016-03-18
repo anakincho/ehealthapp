@@ -33,6 +33,7 @@ So far implemented by Carly (2081252C):
 	- used JQuery for registration form validation
 	- Updated about page to contain information about app and team
 	- Put up a terms and conditions page
+	- edit/delete categories
 	- Still to do:
-		- edit/delete categories
 		- ajax
+		- share ability
