@@ -104,7 +104,9 @@ def category(request, category_name_slug):
     # Get the username of the currently logged user
     # in order to return the appropriate pages for the requested category
     if request.user.is_authenticated():
-        username = request.user.username
+       username = request.user.username
+    else:
+       username = "Guest"
 
     try:
         # Can we find a category name slug with the given name?

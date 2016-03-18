@@ -8,6 +8,27 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from ehealth_app.bing_search import run_BING_query
+from ehealth_app.healthfinder_search import run_healthfinder_query
+from ehealth_app.medline_search import run_medline_query
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def search(request):
+	result_list = []
+	
+	query = request.GET.get('q')
+	
+	
+	if query:
+		##result_list += run_medline_query(query)
+		result_list += run_healthfinder_query(query)
+		result_list += run_BING_query(query)
+		
+		
+	paginator = Paginator(result_list, 10)
+		
+	return render(request, 'ehealth_app/search.html', {'result_list': result_list})
+
 
 def terms(request):
 	return render(request, 'ehealth_app/tandc.html')
@@ -83,7 +104,9 @@ def category(request, category_name_slug):
     # Get the username of the currently logged user
     # in order to return the appropriate pages for the requested category
     if request.user.is_authenticated():
-        username = request.user.username
+       username = request.user.username
+    else:
+       username = null
 
     try:
         # Can we find a category name slug with the given name?
@@ -199,7 +222,7 @@ def edit_category(request, category_name_slug):
 def delete_category(request, category_name_slug):
 	category = Category.objects.get(slug = category_name_slug)
 	category.delete()
-	return redirect('/ehealth_app/')
+	return HttpResponseRedirect('/ehealth_app/')
 
 
 

@@ -5,7 +5,7 @@
 {% block title %}{{ category_name }}{% endblock %}
 
 {% block body_block %}
-    <h1>{{ category_name }}</h1>
+    <h1>{{ category_name }}</h1> <h2> created by <a href='{% %}'>{{ category.user }} </a></h2>
     {% if category %}
         {% if pages %}
         <ul class="list-group">
@@ -26,6 +26,8 @@
 	<br>
 	{% if category.user == user.username %}
 	<button onclick="window.location= '{% url 'edit_category' category.slug %}';">Edit Category</button>
+	<br>
+	<button onclick="window.location= '{% url 'delete_category' category.slug %}';">Delete Category</button>
 	{% endif %}
         {% else %}
                  The specified category {{ category_name }} does not exist!

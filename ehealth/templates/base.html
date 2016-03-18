@@ -73,14 +73,26 @@
             		{% for category in categories %}
             			{% if category.shared %} <!--If the creator of the category has shared that category-->
                 		<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
-            			{% else %}
-            				{% if category.user == user.username %} <!--This is used in order to show all the cats created by the current user-->
-                				<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
-            				{% endif %}
             			{% endif %}
             		{% endfor %}
         	</ul>
 
+		{% if user.is_authenticated %}
+		<div class="panel panel-success">
+        		<div class="panel-heading">
+                		<h3 class="panel-title">Private Categories</h3>
+                	</div>
+        	</div>
+		<ul class="list-group">
+		
+            		{% for category in categories %}
+            			{% if category.user == user.username %} 
+					{% if category.shared == 0 %}
+                			<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>         				{% endif %}
+				{% endif %}
+            		{% endfor %}
+        	</ul>
+		{% endif %}
         	{% endif %}
 
 	{% endblock %}
