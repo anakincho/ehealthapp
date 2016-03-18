@@ -8,6 +8,27 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from ehealth_app.bing_search import run_BING_query
+from ehealth_app.healthfinder_search import run_healthfinder_query
+from ehealth_app.medline_search import run_medline_query
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def search(request):
+	result_list = []
+	
+	query = request.GET.get('q')
+	
+	
+	if query:
+		##result_list += run_medline_query(query)
+		result_list += run_healthfinder_query(query)
+		result_list += run_BING_query(query)
+		
+		
+	paginator = Paginator(result_list, 10)
+		
+	return render(request, 'ehealth_app/search.html', {'result_list': result_list})
+
 
 def terms(request):
 	return render(request, 'ehealth_app/tandc.html')
