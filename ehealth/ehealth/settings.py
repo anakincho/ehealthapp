@@ -51,7 +51,9 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'bootstrap_toolkit',
     'django.contrib.staticfiles',
+    'django_forms_bootstrap',
     'ehealth_app',
     'registration',
 )

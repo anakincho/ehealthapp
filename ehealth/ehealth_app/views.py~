@@ -6,7 +6,11 @@ from ehealth_app.models import Category, Page, UserProfile
 from ehealth_app.forms import CategoryForm, UserProfileForm, PageForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
+def terms(request):
+	return render(request, 'ehealth_app/tandc.html')
 
 #view for the index page
 def index(request):
@@ -157,6 +161,47 @@ def add_category(request):
 
     # Render the form with error messages (if any).
     return render(request, 'ehealth_app/add_category.html', context_dict)
+
+def edit_category(request, category_name_slug):
+
+	context_dict = {}
+
+	categoryname = Category.objects.get(slug = category_name_slug)
+	context_dict['category']=categoryname
+
+	#page_list = category.pages.all()
+
+	context_dict['category_form'] = CategoryForm(instance = categoryname)
+
+	if request.method == 'POST':
+		category_form = CategoryForm(request.POST, request.FILES, instance= categoryname)
+
+		if category_form.is_valid():
+
+			category = category_form.save(commit = False)
+
+			if 'name' in request.FILES:
+				category.name = request.FILES['name']
+
+			if 'shared' in request.FILES:
+				category.shared = request.FILES['shared']
+
+			category.save()
+
+			category_name_slug = category.slug
+
+			context_dict['categoryUpdate'] = category_name_slug
+
+			return HttpResponseRedirect(reverse('category', args=[category_name_slug]))
+
+	return render(request, 'ehealth_app/edit_category.html', context_dict)
+
+def delete_category(request, category_name_slug):
+	category = Category.objects.get(slug = category_name_slug)
+	category.delete()
+	return redirect('/ehealth_app/')
+
+
 
 @login_required
 def profile(request):

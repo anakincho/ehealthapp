@@ -26,8 +26,6 @@
 	<br>
 	{% if category.user == user.username %}
 	<button onclick="window.location= '{% url 'edit_category' category.slug %}';">Edit Category</button>
-	<br>
-	<button onclick="window.location= '{% url 'delete_category' category.slug %}';">Delete Category</button>
 	{% endif %}
         {% else %}
                  The specified category {{ category_name }} does not exist!

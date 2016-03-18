@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 #this enables us to get current url from template being shown in browser
 TEMPLATE_CONTEXT_PROCESSORS = (
+  'django.contrib.auth.context_processors.auth',
   'django.core.context_processors.request',
 )
 
@@ -51,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_forms_bootstrap',
     'ehealth_app',
     'registration',
 )
