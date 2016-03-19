@@ -13,4 +13,5 @@ urlpatterns = patterns('',
 		url(r'^category/(?P<category_name_slug>[\w\-]+)/edit/$', views.edit_category, name='edit_category'),
 		url(r'^delete_category/(?P<category_name_slug>[\w\-]+)$', views.delete_category, name='delete_category'),
 		url(r'^search/', views.search, name='search'),
+        url(r'^api/search_autocomplete/', views.search_autocomplete, name='search_autocomplete'),
         )
