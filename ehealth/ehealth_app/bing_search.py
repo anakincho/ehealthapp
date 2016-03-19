@@ -54,7 +54,6 @@ def run_BING_query(search_terms):
 
         # Convert the string response to a Python dictionary object.
 		json_response = json.loads(response)
-		print json_response
 
         # Loop through each page returned, populating out results list.
 		for result in json_response['d']['results']:

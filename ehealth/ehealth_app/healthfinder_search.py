@@ -17,8 +17,8 @@ def run_healthfinder_query(search_terms):
 	json_response = json.loads(response)
 	
 	
-	
-	for result in json_response['Result']['Topics']:
+	if json_response['Result'].has_key('Topics'):
+		for result in json_response['Result']['Topics']:
 			results.append({
 			'title': result['Title'],
 			'link': result['AccessibleVersion'],
