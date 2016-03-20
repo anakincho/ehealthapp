@@ -145,7 +145,7 @@ a:visited {
                 {% if user.is_authenticated %}
                 <li><button onclick="window.location= '{% url 'add_category' %}';"  class="btn btn-success"><h3>Add a New Category</h3></button></a></li>
 		<li> &nbsp; </li>
-                <li><button onclick="window.location= '{% url 'auth_logout' %}'?next=/ehealth_app/;"  class="btn btn-success"><h3>Logout</h3></button></li>
+                <li><button onclick="window.location= '{% url 'auth_logout' %}?next=/ehealth_app/';"  class="btn btn-success"><h3>Logout</h3></button></li>
 		<li> &nbsp; </li>
                 <li><button onclick="window.location= '{% url 'profile' %}';"  class="btn btn-success"><h3>Profile</h3></button></a></li>
 		<li> &nbsp; </li>

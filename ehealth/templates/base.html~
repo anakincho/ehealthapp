@@ -164,7 +164,7 @@ a:visited {
             <ul class="nav navbar-nav navbar-left" >
 		<li>&nbsp; &nbsp; </li>
                 <li><button onclick="window.location= '{% url 'index' %}';"  class="btn btn-success"><h3>Home</h3></button> </li>
-		<li>&nbsp; &nbsp; </li>
+		<li>&nbsp; </li>
                 <li><button onclick="window.location= '{% url 'about' %}';"  class="btn btn-success"><h3>About</h3></button></li>
             </ul>
         </div>
@@ -219,6 +219,11 @@ a:visited {
             			<div class="col-xs-6">
 					<div class="ui-widget">
   							<input id="search" type="text" name="q" class="form-control" placeholder="Tell us what's on your mind...">
+							<form id="apichoice" action="">
+								<input type="checkbox" name="bingApi" onClick= "toggleBing('bingApi', 'enable')" value="medlinetoggle">Medline Plus<br>
+								<input type="checkbox" name="api" value="healthfindertoggle">Healthfinder.gov<br>
+								<input type="checkbox" name="api" value="healthfindertoggle">Bing<br>
+							</form>
 						</div>
             			</div>
            			<!-- <input type="text" class="input-large search-query" id="query" placeholder="Tell us what's on your mind..."> -->
