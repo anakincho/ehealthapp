@@ -89,7 +89,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div>
 		
-                {% block body_block %}
+               
 {% block body_block %}
 
 <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
