@@ -1,1 +1,7 @@
-alert("message from external js file located in: static/js/script.js");
+$(function() {
+    console.log("in function")
+    $("#search").autocomplete({
+            source: "/api/search_autocomplete/",
+            minLength: 2,
+    });
+});
