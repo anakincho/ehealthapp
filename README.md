@@ -37,3 +37,12 @@ So far implemented by Carly (2081252C):
 	- Still to do:
 		- ajax
 		- share ability
+
+So far implemented by Calum (2082101Y, calumyoung95)
+	-Added bing_search.py
+	-Added healthfinder_search.py
+	-Added search view to views.py
+	-Added search url to urls.py
+	-Updated the base template to submit search form
+	-Created medline_search.py half functional (still to be finished)
+	-Created search.html which is redirected to if user searches
