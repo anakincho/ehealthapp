@@ -34,7 +34,6 @@ def search(request):
 			
 	query = request.GET.get('q')
 	api_checked = request.GET.getlist('apicheck[]')
-	print api_checked
 	if query:
 		if 'bingSearch' in api_checked:
 			result_list += run_BING_query(query)	

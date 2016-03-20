@@ -22,11 +22,13 @@
                     <div class="panel-body">
                         <div class="list-group">
                             {% for result in result_list %}
+								<!-- perhaps another for loop for the readability scores -->
                                 <div class="list-group-item">
                                     <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a></h4>
                                     <p class="list-group-item-text">{{ result.summary }}</p>
 									</br>
 									<p class = "list-group-item-text">{{result.from}} </p>
+									<!-- Add readability etc scores here as here -->
                                 </div>
 								<!-- Have some code here to implement adding of pages to favourites -->
 								<!-- set models.title to result.title etc -->
