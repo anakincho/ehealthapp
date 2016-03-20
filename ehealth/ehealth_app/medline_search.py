@@ -14,15 +14,20 @@ def run_medline_query(search_terms):
 	url= (base_url + term + ret_type)
 	
 	dom = minidom.parse(urllib.urlopen(url)) 
+	document = dom.getElementsByTagName('document')
 	
-	for result in dom.getElementsByTagName('document'):
-			print result.getAttribute('rank')
+	for object in document:
+		health_topic = object.getElementsByTagName('health-topic')
+		for result in health_topic:
+			summaries = result.getElementsByTagName('full-summary')
 			results.append({
-			'title': result.getAttribute('rank'),  ##placeholder until I can figure out how to access title
+			'title': result.getAttribute('title'),
 			'link': result.getAttribute('url'),
 			'from': "From:     Medline Plus",
-			'summary': 'content'  ## placeholder until I can access summary
+			'summary': " "
 			})
+			##for summary in summaries:
+				##print summary.getElementsByTagName('p')
 			
 			
 		
