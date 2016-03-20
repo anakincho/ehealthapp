@@ -34,9 +34,11 @@ So far implemented by Carly (2081252C):
 	- Updated about page to contain information about app and team
 	- Put up a terms and conditions page
 	- edit/delete categories
+	- share ability
+	- new design
 	- Still to do:
 		- ajax
-		- share ability
+		- make stuff look better
 
 So far implemented by Calum (2082101Y, calumyoung95):
 	-Added bing_search.py
