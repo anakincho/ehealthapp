@@ -1,0 +1,1 @@
+alert("message from external js file located in: static/js/script.js");

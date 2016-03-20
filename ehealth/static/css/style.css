@@ -1,14 +1,94 @@
-body{
-    font-family: "Comic Sans MS";
-}
 #logo{
     font-family: "Courier";
     color: green;
 }
 #profilePic {
-    height: 50px;
+    height: 70px;
 }
-.navbar-brand
-    {
+.navbar-brand{
         padding-top: 0;
-    }
+}
+
+#body{
+  padding-top: 80px;
+  background-color: #EDEDED;
+}
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top {
+  border: 0;
+  background-color: #FFF;
+  padding-top: 0px;
+  font-size: 18px;
+}
+.col-sm-3.col-md-2.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .col-sm-3.col-md-2.sidebar {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color:  #d6d6c2;
+    border-right: 1px solid #eee;
+  }
+}
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-top: -20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+#main {
+  padding: 10px;
+  padding-top: 75px
+}
+@media (min-width: 768px) {
+  #main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+#main .page-header {
+  margin-top: 0px;
+}
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+a:link {
+  color: #29a329;
+}
+
+a:visited {
+  color: #145214
+}
