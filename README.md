@@ -20,11 +20,20 @@ So far implemented by Niki:
 	- Made Categories, Pages sharable (a user can choose if a category/page is to be shared or no)
 	- Views 
 	- Urls
+	- Some of the templates
 	- Forms
 	- Bootstrap beginning
 	- User profiles (a user can set up their profile, including profile pic and website, also important thing is that the implementation allows the user to edit his profile!)
 	- It is 2 a.m so I am not sure what else but I am sure I am missing half the stuff
-	- 
+	
+
+	- Implemented all the scores (flesh, subjectivity, polarity)
+	- Wrote down the pseudo code on how it should be implemented in the view
+	- fixed all the inline and internal css now is rewritten in an external file
+	- removed the internal js and rewrote it in external script.js file
+	- implemented the autocomplete feature with help from Carly for the suggestion list
+	- fixed some bugs and did some validation 
+	- NOTE IMPORTANT ! team do pip install textstat and pip install textblob in your VE  
 
 So far implemented by Carly (2081252C):
 	- updated base to contain categories sidebar and search bar like wireframes
