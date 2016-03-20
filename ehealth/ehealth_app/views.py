@@ -33,7 +33,7 @@ def search(request):
 	
 	
 	if query:
-		##result_list += run_medline_query(query)
+		result_list += run_medline_query(query)
 		result_list += run_healthfinder_query(query)
 		result_list += run_BING_query(query)
 		

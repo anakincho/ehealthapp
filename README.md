@@ -38,7 +38,7 @@ So far implemented by Carly (2081252C):
 		- ajax
 		- share ability
 
-So far implemented by Calum (2082101Y, calumyoung95)
+So far implemented by Calum (2082101Y, calumyoung95):
 	-Added bing_search.py
 	-Added healthfinder_search.py
 	-Added search view to views.py
@@ -46,3 +46,6 @@ So far implemented by Calum (2082101Y, calumyoung95)
 	-Updated the base template to submit search form
 	-Created medline_search.py half functional (still to be finished)
 	-Created search.html which is redirected to if user searches
+	-Updated medline. Works functionally but the display is not correct
+	-Still to implement: pagination (ew) and a way to toggle APIs
+	-Its 2:15AM I hate my life
