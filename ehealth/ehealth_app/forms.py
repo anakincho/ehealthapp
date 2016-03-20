@@ -2,6 +2,8 @@ __author__ = 'Nikolay'
 from django import forms
 from ehealth_app.models import Page, Category, UserProfile
 
+
+
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Please enter the category name.")
     shared = forms.BooleanField(help_text="Would you like this category to be viewed by other users?", required=False)

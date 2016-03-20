@@ -219,16 +219,17 @@ a:visited {
             			<div class="col-xs-6">
 					<div class="ui-widget">
   							<input id="search" type="text" name="q" class="form-control" placeholder="Tell us what's on your mind...">
-							<form id="apichoice" action="">
-								<input type="checkbox" name="bingApi" onClick= "toggleBing('bingApi', 'enable')" value="medlinetoggle">Medline Plus<br>
-								<input type="checkbox" name="api" value="healthfindertoggle">Healthfinder.gov<br>
-								<input type="checkbox" name="api" value="healthfindertoggle">Bing<br>
-							</form>
-						</div>
+							</div>
             			</div>
            			<!-- <input type="text" class="input-large search-query" id="query" placeholder="Tell us what's on your mind..."> -->
-        		</div>
+        		
         		<button type="submit" class="btn btn-success">Search</button>
+				</br>
+					<input checked= "checked" type="checkbox" name="apicheck[]" value ='medlineSearch'>Medline Plus<br>
+					<input checked= "checked" type="checkbox" name="apicheck[]" value = 'healthfinderSearch'>Healthfinder.gov<br>
+					<input checked= "checked" type="checkbox" name="apicheck[]" value = 'bingSearch'>Bing<br>
+				</div>
+						
     			</form>
 		</div>
                 {% block body_block %}{% endblock %}

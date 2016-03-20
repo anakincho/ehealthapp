@@ -26,16 +26,24 @@ def search_autocomplete(request):
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
+	
+	
 def search(request):
 	result_list = []
 	
+			
 	query = request.GET.get('q')
-	
-	
+	api_checked = request.GET.getlist('apicheck[]')
+	print api_checked
 	if query:
-		result_list += run_medline_query(query)
-		result_list += run_healthfinder_query(query)
-		result_list += run_BING_query(query)
+		if 'bingSearch' in api_checked:
+			result_list += run_BING_query(query)	
+		if 'medlineSearch' in api_checked:
+			result_list += run_medline_query(query)
+		if 'healthfinderSearch in api_checked:
+			result_list += run_healthfinder_query(query)
+		
+		 
 		
 		
 	paginator = Paginator(result_list, 10)
