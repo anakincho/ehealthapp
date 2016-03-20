@@ -40,7 +40,7 @@ def search(request):
 			result_list += run_BING_query(query)	
 		if 'medlineSearch' in api_checked:
 			result_list += run_medline_query(query)
-		if 'healthfinderSearch in api_checked:
+		if 'healthfinderSearch' in api_checked:
 			result_list += run_healthfinder_query(query)
 		
 		 
