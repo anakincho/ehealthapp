@@ -50,9 +50,9 @@ def search(request):
 		 
 		
 		
-	paginator = Paginator(result_list, 10)
-		
-	return render(request, 'ehealth_app/search.html', {'result_list': result_list})
+	##paginator = Paginator(result_list, 10)
+	num_results = len(result_list)
+	return render(request, 'ehealth_app/search.html', {'result_list': result_list, 'num_results':num_results})
 
 
 def terms(request):
