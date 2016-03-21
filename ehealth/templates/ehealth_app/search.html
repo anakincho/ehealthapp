@@ -48,7 +48,7 @@
 									<!-- Add readability etc scores here as here -->
 					<br>
 					{% if user.is_authenticated %}
-					<button input type="submit" name ="submit" class="btn btn-success"> Save Page </button>
+					<button onclick="window.location= '{% url 'save_page' %}';"  class="btn btn-success"> Save Page </button>
 					 {% endif %}
 					 </form> <!-- End Of Form -->
                                 </div>

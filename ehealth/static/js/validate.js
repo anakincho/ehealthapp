@@ -1,0 +1,2 @@
+$( "#regform" ).validate();
+

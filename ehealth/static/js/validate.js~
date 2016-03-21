@@ -1,0 +1,4 @@
+<script>
+// make fields required
+$( "#regform" ).validate();
+</script>
