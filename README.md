@@ -15,7 +15,7 @@ For TeamMembers:
 	Pillow==3.1.1
 	IMPORTANT to have the same versions, otherwise django is mean and crashes.
 
-So far implemented by Niki:
+So far implemented by Niki (git username: anakincho, student id: 2115451i):
 	- Models (Categories, Pages) added all fields
 	- Made Categories, Pages sharable (a user can choose if a category/page is to be shared or no)
 	- Views 
@@ -34,6 +34,11 @@ So far implemented by Niki:
 	- implemented the autocomplete feature with help from Carly for the suggestion list
 	- fixed some bugs and did some validation 
 	- NOTE IMPORTANT ! team do pip install textstat and pip install textblob in your VE  
+
+	- Implemented save pages functionality,
+	- fixed some major bugs
+	- fixed some html bugs
+	- wrote comments on views implemented
 
 So far implemented by Carly (2081252C):
 	- updated base to contain categories sidebar and search bar like wireframes
