@@ -1,3 +1,7 @@
+#hidden_fields{
+    display: none;
+}
+
 #logo{
     font-family: "Courier";
     color: green;
@@ -106,6 +110,4 @@ a:visited {
     margin-left: auto;
 }
 
-#foot{
-    margin-right: 60%;
-}
+

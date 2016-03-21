@@ -138,7 +138,7 @@
 		</div>
                 {% block body_block %}{% endblock %}
                 <section id="footer">
-			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5"><br> <div id="foot">Ehealth™ <a href="{% url 'tandc' %}">T&C</a></p></div>
+			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5"><br> Ehealth™ <a href="{% url 'tandc' %}">T&C</a></div>
                 </section>
             </div>
         </div>
