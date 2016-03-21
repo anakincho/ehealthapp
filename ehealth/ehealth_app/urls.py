@@ -14,4 +14,5 @@ urlpatterns = patterns('',
 		url(r'^delete_category/(?P<category_name_slug>[\w\-]+)$', views.delete_category, name='delete_category'),
 		url(r'^search/', views.search, name='search'),
         url(r'^search_autocomplete/$', views.search_autocomplete, name='search_autocomplete'),
+	url(r'^save_page/$', views.save_page, name='save_page'),
         )

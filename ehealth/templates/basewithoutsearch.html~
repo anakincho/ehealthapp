@@ -39,7 +39,7 @@
 	
 		<style>
 body {
-  padding-top: 150px;
+  padding-top: 80px;
   background-color: #EDEDED;
 }
 .sub-header {
@@ -210,7 +210,8 @@ a:visited {
 	{% endblock %}
 
         </div>
-
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+           
                 {% block body_block %}{% endblock %}
                 <footer>
 			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5">Ehealth™ <a href="{% url 'tandc' %}">T&C</a></div>

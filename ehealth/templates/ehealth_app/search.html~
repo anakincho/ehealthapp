@@ -33,10 +33,10 @@
 									<p class = "list-group-item-text">{{result.from}} </p>
 									<!-- Add readability etc scores here as here -->
 					<br>
+					<br>
 					<button onclick="window.location= '{% url 'save_page' %}';"  class="btn btn-success"> Save Page </button>
                                 </div>
-				<br>					
-			<!-- Have some code here to implement adding of pages to favourites -->
+								<!-- Have some code here to implement adding of pages to favourites -->
 								<!-- set models.title to result.title etc -->
                             {% endfor %}
                         </div>

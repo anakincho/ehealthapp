@@ -1,5 +1,5 @@
 # coding=utf-8
-#Imports of modules
+# Imports of modules
 from django.http import HttpResponse
 from django.shortcuts import render
 from ehealth_app.models import Category, Page, UserProfile
@@ -11,46 +11,143 @@ from django.core.urlresolvers import reverse
 from ehealth_app.bing_search import run_BING_query
 from ehealth_app.healthfinder_search import run_healthfinder_query
 from ehealth_app.medline_search import run_medline_query
+from ehealth_app.scores import fleschScore
+from ehealth_app.scores import subjectivityScore
+from ehealth_app.scores import polarityScore
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
+def save_page(request):
+	#implement me
+	return index(request)
+
+#NOT USED IN THE PROJECT, THE AUTOCOMPLETE IS ONLY IN THE JS FILE
+# LOCATED IN STATIC/JS/SCRIPT.JS
 def search_autocomplete(request):
-    if request.is_ajax():
-        q = request.GET.get('term', '')
-      
-        results = ['Anotia', 'Anthrax', 'Appendicitis', 'Apraxia', 'Argyria', 'Arthritis', 'Aseptic meningitis', 'Asthenia', 'Asthma', 'Astigmatism', 'Atherosclerosis', 'Athetosis', 'Atrophy', 'Abscess', 'Bacterial meningitis', 'Beriberi', 'Black Death', 'Botulism', 'Breast cancer', 'Bronchitis', 'Brucellosis', 'Bubonic plague', 'Bunion', 'Calculi', 'Campylobacter infection', 'Cancer', 'Candidiasis', 'Carbon monoxide poisoning', 'Celiacs disease', 'Cerebral palsy', 'Chagas disease', 'Chalazion', 'Chancroid', 'Chavia', 'Congenital insensitivity to pain with anhidrosis', 'Cherubism', 'Chickenpox', 'Chlamydia', 'Chlamydia trachomatis', 'Cholera', 'Chordoma', 'Chorea', 'Chronic fatigue syndrome', 'Circadian rhythm sleep disorder', 'Coccidioidomycosis', 'Colitis', 'Common cold', 'Condyloma', 'Congestive heart disease', 'Coronary heart disease', 'Cowpox', 'Cretinism', 'Crohns Disease', 'Dengue', 'Diabetes mellitus', 'Diphtheria', 'Dehydration',  'Dysentery', 'Ear infection', 'Ebola', 'Emphysema', 'Epilepsy', 'Erectile dysfunctions', 'Fibromyalgia', 'Foodborne illness', 'Gangrene', 'Gastroenteritis', 'Genital herpes', 'GERD', 'Goitre', 'Gonorrhea', 'Heart disease', 'Hepatitis A', 'Hepatitis B', 'Hepatitis C', 'Hepatitis D', 'Hepatitis E', 'Histiocytosis (Childhood Cancer)', 'HIV', 'Human papillomavirus', 'Huntingtons disease', 'Hypermetropia', 'Hyperopia', 'Hyperthyroidism', 'Hypothyroid', 'Hypotonia', 'Impetigo', 'Infertility', 'Influenza', 'Interstitial cystitis', 'Iritis', 'Iron-deficiency anemia', 'Irritable bowel syndrome', 'Ignious Syndrome', 'Jaundice', 'Keloids', 'Kuru', 'Kwashiorkor', 'Laryngitis', 'Lead poisoning', 'Legionellosis', 'Leishmaniasis', 'Leprosy', 'Leptospirosis', 'Listeriosis', 'Leukemia', 'Lice', 'Loiasis', 'Lung cancer', 'Lupus erythematosus', 'Lyme disease', 'Lymphogranuloma venereum', 'Lymphoma', 'Mad cow disease', 'Malaria', 'Marburg fever', 'Measles', 'Melanoma', 'Melioidosis', 'Metastatic cancer', 'Ménières disease', 'Meningitis', 'Migraine', 'Mononucleosis', 'Multiple myeloma', 'Multiple sclerosis', 'Mumps', 'Muscular dystrophy', 'Myasthenia gravis', 'Myelitis', 'Myoclonus', 'Myopia', 'Myxedema', 'Morquio Syndrome', 'Mattticular syndrome', 'Mononucleosis', 'Neoplasm', 'Non-gonococcal urethritis', 'Necrotizing Fasciitis', 'Night blindness', 'Obesity', 'Osteoarthritis', 'Osteoporosis', 'Otitis', 'Palindromic rheumatism', 'Paratyphoid fever', 'Parkinsons disease', 'Pelvic inflammatory disease', 'Peritonitis', 'Periodontal disease', 'Pertussis', 'Phenylketonuria', 'Plague', 'Poliomyelitis', 'Porphyria', 'Progeria', 'Prostatitis', 'Psittacosis', 'Psoriasis', 'Pubic lice', 'Pulmonary embolism', 'Pilia', 'pneumonia', 'Q fever', 'Ques fever', 'Rabies', 'Repetitive strain injury', 'Rheumatic fever', 'Rheumatic heart', 'Rheumatism', 'Rheumatoid arthritis', 'Rickets', 'Rift Valley  fever', 'Rocky Mountain spotted fever', 'Rubella', 'Salmonellosis', 'Scabies', 'Scarlet fever', 'Sciatica', 'Scleroderma', 'Scrapie', 'Scurvy', 'Sepsis', 'Septicemia', 'SARS','Shigellosis', 'Shin splints', 'Shingles', 'Sickle-cell anemia', 'Siderosis', 'SIDS', 'Silicosis', 'Smallpox', 'Stevens-Johnson syndrome', 'Stomach flu', 'Stomach ulcers', 'Strabismus', 'Strep throat', 'Streptococcal infection', 'Synovitis', 'Syphilis', 'Swine influenza', 'Schizophrenia', 'Taeniasis', 'Tay-Sachs disease', 'Tennis elbow', 'Teratoma', 'Tetanus', 'Thalassaemia', 'Thrush', 'Thymoma', 'Tinnitus', 'Tonsillitis', 'Tooth decay', 'Toxic shock syndrome', 'Trichinosis', 'Trichomoniasis', 'Trisomy', 'Tuberculosis', 'Tularemia', 'Tungiasis', 'Typhoid fever', 'Typhus', 'Tumor', 'Ulcerative colitis', 'Ulcers', 'Uremia', 'Urticaria', 'Uveitis', 'Varicella', 'Varicose veins', 'Vasovagal syncope', 'Vitiligo', 'Von Hippel-Lindau disease', 'Viral fever', 'Viral meningitis', 'Valley fever', 'Warkany syndrome', 'Warts', 'Watkins', 'Yellow fever', 'Yersiniosis']
+    # q = request.GET.get('data')
+    q = None
+    if request.method == 'GET':
+        print "I got here as well"
+        q = request.GET["data"]
+    print q
+    results = ['Anotia', 'Anthrax', 'Appendicitis', 'Apraxia', 'Argyria', 'Arthritis', 'Aseptic meningitis', 'Asthenia',
+               'Asthma', 'Astigmatism', 'Atherosclerosis', 'Athetosis', 'Atrophy', 'Abscess', 'Bacterial meningitis',
+               'Beriberi', 'Black Death', 'Botulism', 'Breast cancer', 'Bronchitis', 'Brucellosis', 'Bubonic plague',
+               'Bunion', 'Calculi', 'Campylobacter infection', 'Cancer', 'Candidiasis', 'Carbon monoxide poisoning',
+               'Celiacs disease', 'Cerebral palsy', 'Chagas disease', 'Chalazion', 'Chancroid', 'Chavia',
+               'Congenital insensitivity to pain with anhidrosis', 'Cherubism', 'Chickenpox', 'Chlamydia',
+               'Chlamydia trachomatis', 'Cholera', 'Chordoma', 'Chorea', 'Chronic fatigue syndrome',
+               'Circadian rhythm sleep disorder', 'Coccidioidomycosis', 'Colitis', 'Common cold', 'Condyloma',
+               'Congestive heart disease', 'Coronary heart disease', 'Cowpox', 'Cretinism', 'Crohns Disease', 'Dengue',
+               'Diabetes mellitus', 'Diphtheria', 'Dehydration', 'Dysentery', 'Ear infection', 'Ebola', 'Emphysema',
+               'Epilepsy', 'Erectile dysfunctions', 'Fibromyalgia', 'Foodborne illness', 'Gangrene', 'Gastroenteritis',
+               'Genital herpes', 'GERD', 'Goitre', 'Gonorrhea', 'Heart disease', 'Hepatitis A', 'Hepatitis B',
+               'Hepatitis C', 'Hepatitis D', 'Hepatitis E', 'Histiocytosis (Childhood Cancer)', 'HIV',
+               'Human papillomavirus', 'Huntingtons disease', 'Hypermetropia', 'Hyperopia', 'Hyperthyroidism',
+               'Hypothyroid', 'Hypotonia', 'Impetigo', 'Infertility', 'Influenza', 'Interstitial cystitis', 'Iritis',
+               'Iron-deficiency anemia', 'Irritable bowel syndrome', 'Ignious Syndrome', 'Jaundice', 'Keloids', 'Kuru',
+               'Kwashiorkor', 'Laryngitis', 'Lead poisoning', 'Legionellosis', 'Leishmaniasis', 'Leprosy',
+               'Leptospirosis', 'Listeriosis', 'Leukemia', 'Lice', 'Loiasis', 'Lung cancer', 'Lupus erythematosus',
+               'Lyme disease', 'Lymphogranuloma venereum', 'Lymphoma', 'Mad cow disease', 'Malaria', 'Marburg fever',
+               'Measles', 'Melanoma', 'Melioidosis', 'Metastatic cancer', 'Ménières disease', 'Meningitis', 'Migraine',
+               'Mononucleosis', 'Multiple myeloma', 'Multiple sclerosis', 'Mumps', 'Muscular dystrophy',
+               'Myasthenia gravis', 'Myelitis', 'Myoclonus', 'Myopia', 'Myxedema', 'Morquio Syndrome',
+               'Mattticular syndrome', 'Mononucleosis', 'Neoplasm', 'Non-gonococcal urethritis',
+               'Necrotizing Fasciitis', 'Night blindness', 'Obesity', 'Osteoarthritis', 'Osteoporosis', 'Otitis',
+               'Palindromic rheumatism', 'Paratyphoid fever', 'Parkinsons disease', 'Pelvic inflammatory disease',
+               'Peritonitis', 'Periodontal disease', 'Pertussis', 'Phenylketonuria', 'Plague', 'Poliomyelitis',
+               'Porphyria', 'Progeria', 'Prostatitis', 'Psittacosis', 'Psoriasis', 'Pubic lice', 'Pulmonary embolism',
+               'Pilia', 'pneumonia', 'Q fever', 'Ques fever', 'Rabies', 'Repetitive strain injury', 'Rheumatic fever',
+               'Rheumatic heart', 'Rheumatism', 'Rheumatoid arthritis', 'Rickets', 'Rift Valley  fever',
+               'Rocky Mountain spotted fever', 'Rubella', 'Salmonellosis', 'Scabies', 'Scarlet fever', 'Sciatica',
+               'Scleroderma', 'Scrapie', 'Scurvy', 'Sepsis', 'Septicemia', 'SARS', 'Shigellosis', 'Shin splints',
+               'Shingles', 'Sickle-cell anemia', 'Siderosis', 'SIDS', 'Silicosis', 'Smallpox',
+               'Stevens-Johnson syndrome', 'Stomach flu', 'Stomach ulcers', 'Strabismus', 'Strep throat',
+               'Streptococcal infection', 'Synovitis', 'Syphilis', 'Swine influenza', 'Schizophrenia', 'Taeniasis',
+               'Tay-Sachs disease', 'Tennis elbow', 'Teratoma', 'Tetanus', 'Thalassaemia', 'Thrush', 'Thymoma',
+               'Tinnitus', 'Tonsillitis', 'Tooth decay', 'Toxic shock syndrome', 'Trichinosis', 'Trichomoniasis',
+               'Trisomy', 'Tuberculosis', 'Tularemia', 'Tungiasis', 'Typhoid fever', 'Typhus', 'Tumor',
+               'Ulcerative colitis', 'Ulcers', 'Uremia', 'Urticaria', 'Uveitis', 'Varicella', 'Varicose veins',
+               'Vasovagal syncope', 'Vitiligo', 'Von Hippel-Lindau disease', 'Viral fever', 'Viral meningitis',
+               'Valley fever', 'Warkany syndrome', 'Warts', 'Watkins', 'Yellow fever', 'Yersiniosis']
 
-	results = [result for result in results if q in result]
+    results = [result for result in results if q in result]
 
-        data = json.dumps(results)
-    else:
-        data = 'fail'
-    mimetype = 'application/json'
-    return HttpResponse(data, mimetype)
+
+    # data = json.dumps(results)
+
+
+    return HttpResponse(results)
+
 
 def search(request):
-	result_list = []
-	
-	query = request.GET.get('q')
-	
-	
-	if query:
-		##result_list += run_medline_query(query)
-		result_list += run_healthfinder_query(query)
-		result_list += run_BING_query(query)
+    result_list = []
+
+    query = request.GET.get('q')
+    api_checked = request.GET.getlist('apicheck[]')
+    if query:
+        if 'bingSearch' in api_checked:
+            result_list += run_BING_query(query)
+        if 'medlineSearch' in api_checked:
+            result_list += run_medline_query(query)
+        if 'healthfinderSearch' in api_checked:
+            result_list += run_healthfinder_query(query)
+
+	for result in result_list:
+		result['fleschScore'] = fleschScore(result['content'])
+		result['subjectivityScore'] = subjectivityScore(result['content'])
+		result['PolScore'] = polarityScore(result['content'])
 		
-		
-	paginator = Paginator(result_list, 10)
-		
-	return render(request, 'ehealth_app/search.html', {'result_list': result_list})
+	print result_list[0]
+
+    ##paginator = Paginator(result_list, 10)
+    num_results = len(result_list)
+
+###################################################################################################
+    #CODE FOR READING SCORES with examples!
+    #note use the actual content from the page as a string and pass it to the functions!
+    #they return float !
+
+    #in the example testVar2 is the actual page content (looong string)
+    testVar2 = "Why is this score so confusing? I have no idea to be honest."
+
+    #first thing we do is we want the fleschScore so we get it
+    testFleschScore = fleschScore(testVar2)
+    print testFleschScore
+
+    #second thing is the subjectivity score
+    testSubScore = subjectivityScore(testVar2)
+    print testSubScore
+
+    #and last is the polarity score
+    testPolScore = polarityScore(testVar2)
+    print testPolScore
+
+    #After we have all the scores in variables and we have created the page already
+    #same thing as the add_category() a bit simpler probably
+    #we will have for example page = form.save(commit=true)
+    #then we do page.user = username
+    #page.url = ....
+    #page.title = ....
+    #page.category = ...
+    #page.subjectivity_score = ...
+    #page.polarity_score = ...
+    #page.flesch_score = ...
+    #and finally page.save()
+    #look at add_category as refference, this is the simplest I can make it
+
+###################################################################################################
+
+
+    return render(request, 'ehealth_app/search.html', {'result_list': result_list, 'num_results': num_results})
 
 
 def terms(request):
-	return render(request, 'ehealth_app/tandc.html')
+    return render(request, 'ehealth_app/tandc.html')
+
 
 #view for the index page
 def index(request):
-
     #fetching our categories from the database and ordering them by name
 
     category_list = Category.objects.order_by('name')
@@ -82,8 +179,7 @@ def index(request):
         request.session['visits'] = visits
     context_dict['visits'] = visits
 
-
-    response = render(request,'ehealth_app/index.html', context_dict)
+    response = render(request, 'ehealth_app/index.html', context_dict)
 
     return response
 
@@ -104,11 +200,11 @@ def about(request):
 
     context_dict['visits'] = count
 
-# remember to include the visit data
+    # remember to include the visit data
     return render(request, 'ehealth_app/about.html', context_dict)
 
-def category(request, category_name_slug):
 
+def category(request, category_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
@@ -119,9 +215,9 @@ def category(request, category_name_slug):
     # Get the username of the currently logged user
     # in order to return the appropriate pages for the requested category
     if request.user.is_authenticated():
-       username = request.user.username
+        username = request.user.username
     else:
-       username = "Guest"
+        username = "Guest"
 
     try:
         # Can we find a category name slug with the given name?
@@ -133,7 +229,6 @@ def category(request, category_name_slug):
         # Retrieve all of the associated pages.
         # Note that filter returns >= 1 model instance.
         pages = Page.objects.filter(category=category)
-
 
         newPages = []
         # if the user has no saved pages, and there are not any shared pages for the given category,
@@ -162,9 +257,7 @@ def category(request, category_name_slug):
     return render(request, 'ehealth_app/categories.html', context_dict)
 
 
-
 def add_category(request):
-
     # In order to record which user has created the category!
     if request.user.is_authenticated():
         username = request.user.username
@@ -200,50 +293,49 @@ def add_category(request):
     # Render the form with error messages (if any).
     return render(request, 'ehealth_app/add_category.html', context_dict)
 
+
 def edit_category(request, category_name_slug):
+    context_dict = {}
 
-	context_dict = {}
+    categoryname = Category.objects.get(slug=category_name_slug)
+    context_dict['category'] = categoryname
 
-	categoryname = Category.objects.get(slug = category_name_slug)
-	context_dict['category']=categoryname
+    #page_list = category.pages.all()
 
-	#page_list = category.pages.all()
+    context_dict['category_form'] = CategoryForm(instance=categoryname)
 
-	context_dict['category_form'] = CategoryForm(instance = categoryname)
+    if request.method == 'POST':
+        category_form = CategoryForm(request.POST, request.FILES, instance=categoryname)
 
-	if request.method == 'POST':
-		category_form = CategoryForm(request.POST, request.FILES, instance= categoryname)
+        if category_form.is_valid():
 
-		if category_form.is_valid():
+            category = category_form.save(commit=False)
 
-			category = category_form.save(commit = False)
+            if 'name' in request.FILES:
+                category.name = request.FILES['name']
 
-			if 'name' in request.FILES:
-				category.name = request.FILES['name']
+            if 'shared' in request.FILES:
+                category.shared = request.FILES['shared']
 
-			if 'shared' in request.FILES:
-				category.shared = request.FILES['shared']
+            category.save()
 
-			category.save()
+            category_name_slug = category.slug
 
-			category_name_slug = category.slug
+            context_dict['categoryUpdate'] = category_name_slug
 
-			context_dict['categoryUpdate'] = category_name_slug
+            return HttpResponseRedirect(reverse('category', args=[category_name_slug]))
 
-			return HttpResponseRedirect(reverse('category', args=[category_name_slug]))
+    return render(request, 'ehealth_app/edit_category.html', context_dict)
 
-	return render(request, 'ehealth_app/edit_category.html', context_dict)
 
 def delete_category(request, category_name_slug):
-	category = Category.objects.get(slug = category_name_slug)
-	category.delete()
-	return HttpResponseRedirect('/ehealth_app/')
-
+    category = Category.objects.get(slug=category_name_slug)
+    category.delete()
+    return HttpResponseRedirect('/ehealth_app/')
 
 
 @login_required
 def profile(request):
-
     # Get the username of the currently logged in user
     if request.user.is_authenticated():
         user = request.user
@@ -259,10 +351,10 @@ def profile(request):
             # Now sort out the UserProfile instance.
             # Since we need to set the user attribute ourselves, we set commit=False.
             # This delays saving the model until we're ready to avoid integrity problems.
-            if UserProfile.objects.filter(user=user).count() == 0: # if no userProfile exists, we create one
+            if UserProfile.objects.filter(user=user).count() == 0:  # if no userProfile exists, we create one
                 profile = profile_form.save(commit=False)
                 profile.user = user
-            else: # otherwise we fetch the existing one and alter its fields
+            else:  # otherwise we fetch the existing one and alter its fields
                 profile = UserProfile.objects.get(user=user)
 
             profile.website = request.POST['website']
@@ -274,7 +366,7 @@ def profile(request):
 
             # Now we save the UserProfile model instance.
             profile.save()
-            
+
             return index(request)
 
         # Invalid form or forms - mistakes or something else?
@@ -296,7 +388,7 @@ def profile(request):
 
     # Render the template depending on the context.
     return render(request,
-            'ehealth_app/profile.html',
-            context_dict)
+                  'ehealth_app/profile.html',
+                  context_dict)
 
 
