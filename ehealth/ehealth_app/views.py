@@ -17,9 +17,6 @@ from ehealth_app.scores import polarityScore
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
-def save_page(request):
-	#implement me
-	return index(request)
 
 #NOT USED IN THE PROJECT, THE AUTOCOMPLETE IS ONLY IN THE JS FILE
 # LOCATED IN STATIC/JS/SCRIPT.JS
@@ -96,9 +93,9 @@ def search(request):
 	for result in result_list:
 		result['fleschScore'] = fleschScore(result['content'])
 		result['subjectivityScore'] = subjectivityScore(result['content'])
-		result['PolScore'] = polarityScore(result['content'])
+		result['polScore'] = polarityScore(result['content'])
 		
-	print result_list[0]
+	result_list.sort(key=lambda item:item['polScore'], reverse = False)
 
     ##paginator = Paginator(result_list, 10)
     num_results = len(result_list)
