@@ -18,8 +18,23 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
 def save_page(request):
-	#implement me
-	return index(request)
+	result_list = request.session['result_list_cookie'] ## the full result list. Doubt its needed.
+	if request.method == "POST":
+		form = PageForm(request.POST)
+		
+		if form.is_valid():
+			page = form.save(commit=False)
+			page.title = resultTitle.value  ##Dunno if this even works
+			page.shared = False
+			page.url = resultURL.value  ##Dunno if this even works (May have to somehow get the title and url from search view)
+			page.save()
+			return index(request)
+		else:
+			print form.errors
+	else:
+		form = PageForm()
+		
+	return render(request, 'ehealth_app/save_page')
 
 #NOT USED IN THE PROJECT, THE AUTOCOMPLETE IS ONLY IN THE JS FILE
 # LOCATED IN STATIC/JS/SCRIPT.JS
