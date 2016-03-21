@@ -13,8 +13,8 @@ def run_BING_query(search_terms):
     # Specify how many results we wish to be returned per page.
     # Offset specifies where in the results list to start from.
     # With results_per_page = 10 and offset = 11, this would start from page 2.
-    results_per_page = 5
-    offset = 0
+    count = 40
+    offset = 41
 
     # Wrap quotes around our query terms as required by the Bing API.
     # The query we will then use is stored within variable query.
@@ -26,7 +26,7 @@ def run_BING_query(search_terms):
     search_url = "{0}{1}?$format=json&$top={2}&$skip={3}&Query={4}".format(
         root_url,
         source,
-        results_per_page,
+        count,
         offset,
         query)
 
