@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet"  type="text/css" href="{% static 'css/style.css' %}" />
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <title>Ehealth - {% block title %}The best ehealth search engine.{% endblock %}</title>
@@ -16,9 +15,11 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
-
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -40,36 +41,35 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"> </span>
             </button>
-            <a class="navbar-brand" href="/ehealth_app/"> <img src="/media/logo.png" height ="60" alt="ehealth logo"></a>
+            <a class="navbar-brand" href="/ehealth_app/"> <img src="/media/logo.png" width ="60" alt="ehealth logo"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-		<br>
+
                 {% if user.is_authenticated %}
-                <li><button onclick="window.location= '{% url 'add_category' %}';"  class="btn btn-success">Add a New Category</button></a></li>
+                <li><button onclick="window.location= '{% url 'add_category' %}';"  class="btn btn-success"><h3>Add a New Category</h3></button></a></li>
 		<li> &nbsp; </li>
-                <li><button onclick="window.location= '{% url 'auth_logout' %}?next=/ehealth_app/';"  class="btn btn-success">Logout</button></li>
+                <li><button onclick="window.location= '{% url 'auth_logout' %}?next=/ehealth_app/';"  class="btn btn-success"><h3>Logout</h3></button></li>
 		<li> &nbsp; </li>
-                <li><button onclick="window.location= '{% url 'profile' %}';"  class="btn btn-success">Profile</button></a></li>
+                <li><button onclick="window.location= '{% url 'profile' %}';"  class="btn btn-success"><h3>Profile</h3></button></a></li>
 		<li> &nbsp; </li>
                     {% if user.userprofile.picture %}
                 <li><img id="profilePic" src="{{ user.userprofile.picture.url }}"/></li>
 		<li> &nbsp; </li>
                     {% endif %}
                 {% else %}
-                <li><button onclick="window.location= '{% url 'registration_register' %}';"  class="btn btn-success">Register Here</h3></button></li>
+                <li><button onclick="window.location= '{% url 'registration_register' %}';"  class="btn btn-success"><h3>Register Here</h3></button></li>
 `		<li> &nbsp; </li>
-                <li><button onclick="window.location= '{% url 'auth_login' %}';"  class="btn btn-success">Login</button></li>
+                <li><button onclick="window.location= '{% url 'auth_login' %}';"  class="btn btn-success"><h3>Login</h3></button></li>
                 {% endif %}
 
 
             </ul>
             <ul class="nav navbar-nav navbar-left" >
-		<BR>
 		<li>&nbsp; &nbsp; </li>
-                <li><button onclick="window.location= '{% url 'index' %}';"  class="btn btn-success">Home</button> </li>
+                <li><button onclick="window.location= '{% url 'index' %}';"  class="btn btn-success"><h3>Home</h3></button> </li>
 		<li>&nbsp; </li>
-                <li><button onclick="window.location= '{% url 'about' %}';"  class="btn btn-success">About</button></li>
+                <li><button onclick="window.location= '{% url 'about' %}';"  class="btn btn-success"><h3>About</h3></button></li>
             </ul>
         </div>
     </div>
@@ -117,7 +117,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main">
             <div>
 		<div class="col-md-offset-3">
-  			<p id="logo" class="col-md-offset-2"><img src="/media/textlogo.png" width=300 alt="ehealth" style="margin-right: auto; margin-left: auto"> </p>
+  			<h1 id="logo" class="col-md-offset-2"><img src="/media/textlogo.png" width=300 alt="ehealth" style="margin-right: auto; margin-left: auto"> </h1>
     			<form id="searchform" action="{% url 'search' %}" method="get">
         		<div class="form-group">
             			<div class="col-xs-6">
@@ -128,20 +128,17 @@
            			<!-- <input type="text" class="input-large search-query" id="query" placeholder="Tell us what's on your mind..."> -->
         		
         		<button type="submit" class="btn btn-success">Search</button>
-				</br>	
-					<br>
-					<p id="toggle">
+				</br>
 					<input checked= "checked" type="checkbox" name="apicheck[]" value ='medlineSearch'>Medline Plus<br>
 					<input checked= "checked" type="checkbox" name="apicheck[]" value = 'healthfinderSearch'>Healthfinder.gov<br>
 					<input checked= "checked" type="checkbox" name="apicheck[]" value = 'bingSearch'>Bing<br>
-					</p>
 				</div>
 						
     			</form>
 		</div>
                 {% block body_block %}{% endblock %}
                 <section id="footer">
-			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5"><br> <p id=foot>Ehealth™ <a href="{% url 'tandc' %}">T&C</a></p></div>
+			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5"><br> Ehealth™ <a href="{% url 'tandc' %}">T&C</a></div>
                 </section>
             </div>
         </div>

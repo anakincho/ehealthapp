@@ -1,5 +1,5 @@
 {% extends 'basewithoutsearch.html' %}
-{% load static %}
+
 {% block body_block %}
 <form role="form" method="post" action=".">
     {% csrf_token %}
@@ -30,6 +30,10 @@
 
 </form>
 
-{% endblock %}
 
-<script src="{% static 'js/validate.js' %}"></script>
+<script>
+// make fields required
+$( "#regform" ).validate();
+</script>
+
+{% endblock %}

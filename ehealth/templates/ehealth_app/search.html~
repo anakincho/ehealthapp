@@ -26,33 +26,23 @@
                             {% for result in results %}
 								<!-- perhaps another for loop for the readability scores -->
                                 <div class="list-group-item">
-								<!-- Take the values of these items and use them as the elements to submit to the PageForm -->
-								<!-- We need resultTitle and resultURL. Once the user clicks savepage they should be redirected -->
-								<!-- They should be redirected to a page that asks them what category they want to add the page to -->
-								<!-- Once they've selected the category; the page is saved to the database -->
-								<!-- Have a look at the save_page view to see me failing -->
-								<form id = "add_page_form" method= "post" action = "ehealth_app/save_page/">
-									{% csrf_token %}
-                                    <h4 class="list-group-item-heading"><a href="{{ result.link }}" name ="resultTitle" value = {{ result.title }} >{{ result.title }}</a></h4>
-									<p class="list-group-item-text" name = "resultURL" value = {{ result.link }} >{{ result.link }}</p>
-									</br>
+                                    <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a></h4>
                                     <p class="list-group-item-text">{{ result.summary }}</p>
 				    </br>
 				    <p class = "list-group-item-text">{{result.from}} </p>
 				    <br>
-				    <u>Scores:</u>
-				    <p class = "list-group-item-text" >Flesch Score: {{result.fleschScore}} </p>
+				    <p><u>Scores:</u></p>
+				    <p class = "list-group-item-text">Flesch Score: {{result.fleschScore}} </p>
 				    <p class = "list-group-item-text">Subjectivity Score: {{result.subjectivityScore}} </p>
 				    <p class = "list-group-item-text">Polarity Score: {{result.polScore}} </p>
 									
 									<!-- Add readability etc scores here as here -->
 					<br>
-					{% if user.is_authenticated %}
-					<button input type="submit" name ="submit" class="btn btn-success"> Save Page </button>
-					 {% endif %}
-					 </form> <!-- End Of Form -->
+					<button onclick="window.location= '{% url 'save_page' %}';"  class="btn btn-success"> Save Page </button>
                                 </div>
 				<br>					
+			<!-- Have some code here to implement adding of pages to favourites -->
+								<!-- set models.title to result.title etc -->
                             {% endfor %}
 			
                         </div>

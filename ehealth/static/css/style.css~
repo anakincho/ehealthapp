@@ -22,7 +22,6 @@
 .navbar.navbar-inverse.navbar-fixed-top {
   border: 0;
   background-color: #FFF;
-  height: 80px;
   padding-top: 0px;
   font-size: 18px;
 }
@@ -46,7 +45,7 @@
 }
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
-  margin-top: -50px;
+  margin-top: -20px;
   margin-left: -20px;
 }
 .nav-sidebar > li > a {
@@ -61,7 +60,7 @@
 }
 #main {
   padding: 10px;
-  padding-top: 80px
+  padding-top: 75px
 }
 @media (min-width: 768px) {
   #main {
@@ -107,15 +106,6 @@ a:visited {
     margin-left: auto;
 }
 
-#toggle{
-   margin-left: 20%;
+#foot{
+    margin-right: 60%;
 }
-
-#logo {
-   margin-left: 10%;
-}
-
-#foot {
-   margin-left: 30%;
-}
-

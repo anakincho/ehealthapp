@@ -17,24 +17,47 @@ from ehealth_app.scores import polarityScore
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
+@login_required
+def add_page(request):
+    #get the username of the current user
+    if request.user.is_authenticated():
+        username = request.user.username
+
+    #if the category is existent save the page on it
+    if Category.objects.filter(name=request.POST.get("category")).count() > 0:
+        p = Page.objects.get_or_create(category=Category.objects.get(name=request.POST.get("category")), title=request.POST.get("title"))[0]
+    #else create a new category with the given name and save the new page there
+    #the category is set to private by default, if wanted the user can go to the category Edit and make it shared
+    else:
+        c = Category.objects.get_or_create(name=request.POST.get("category"), user=username, shared=False)[0]
+        p = Page.objects.get_or_create(category = c, title=request.POST.get("title"))[0]
+
+    p.user = username
+    p.url=request.POST.get("url")
+    p.flesch_score = request.POST.get("flesch_score")
+    p.polarity_score = request.POST.get("polarity_score")
+    p.subjectivity_score = request.POST.get("subjectivity_score")
+    if request.POST.getlist('shared[]'):
+        p.shared = True
+    else:
+        p.shared = False
+    p.save()
+    return render(request, 'ehealth_app/index.html', {})
+
 def save_page(request):
-	result_list = request.session['result_list_cookie'] ## the full result list. Doubt its needed.
-	if request.method == "POST":
-		form = PageForm(request.POST)
-		
-		if form.is_valid():
-			page = form.save(commit=False)
-			page.title = resultTitle.value  ##Dunno if this even works
-			page.shared = False
-			page.url = resultURL.value  ##Dunno if this even works (May have to somehow get the title and url from search view)
-			page.save()
-			return index(request)
-		else:
-			print form.errors
-	else:
-		form = PageForm()
-		
-	return render(request, 'ehealth_app/save_page')
+
+    if request.method == "POST":
+        results = {}
+        results["title"] = request.POST.get("title")
+        results["url"] = request.POST.get("url")
+        results["flesch_score"] = request.POST.get("flesch_score")
+        results["subjectivity_score"] = request.POST.get("subjectivity_score")
+        results["polarity_score"] = request.POST.get("polarity_score")
+
+        return render(request, 'ehealth_app/add_page.html', results)
+
+
+    return 0
 
 #NOT USED IN THE PROJECT, THE AUTOCOMPLETE IS ONLY IN THE JS FILE
 # LOCATED IN STATIC/JS/SCRIPT.JS
@@ -108,12 +131,12 @@ def search(request):
         if 'healthfinderSearch' in api_checked:
             result_list += run_healthfinder_query(query)
 
-	for result in result_list:
-		result['fleschScore'] = fleschScore(result['content'])
-		result['subjectivityScore'] = subjectivityScore(result['content'])
-		result['polScore'] = polarityScore(result['content'])
-		
-	result_list.sort(key=lambda item:item['polScore'], reverse = False)
+        for result in result_list:
+            result['fleschScore'] = fleschScore(result['content'])
+            result['subjectivityScore'] = subjectivityScore(result['content'])
+            result['polScore'] = polarityScore(result['content'])
+
+        result_list.sort(key=lambda item: item['polScore'], reverse=False)
 
     paginator = Paginator(result_list, 10)
     num_results = len(result_list)
@@ -128,7 +151,7 @@ def search(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         results = paginator.page(paginator.num_pages)
 
-###################################################################################################
+    ###################################################################################################
     #CODE FOR READING SCORES with examples!
     #note use the actual content from the page as a string and pass it to the functions!
     #they return float !
@@ -161,10 +184,11 @@ def search(request):
     #and finally page.save()
     #look at add_category as refference, this is the simplest I can make it
 
-###################################################################################################
+    ###################################################################################################
 
 
-    return render(request, 'ehealth_app/search.html', {'result_list': result_list, 'num_results': num_results, 'results': results})
+    return render(request, 'ehealth_app/search.html',
+                  {'result_list': result_list, 'num_results': num_results, 'results': results})
 
 
 def terms(request):

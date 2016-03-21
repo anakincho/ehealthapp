@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-     <link rel="stylesheet"  type="text/css" href="{% static 'css/style.css' %}" />
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <title>Ehealth - {% block title %}The best ehealth search engine.{% endblock %}</title>
@@ -17,6 +16,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
@@ -120,9 +121,9 @@
         		
 		</div>
                 {% block body_block %}{% endblock %}
-                <section id="footer">
+                <footer>
 			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5">Ehealth™ <a href="{% url 'tandc' %}">T&C</a></div>
-                </section>
+                </footer>
             </div>
         </div>
     </div>

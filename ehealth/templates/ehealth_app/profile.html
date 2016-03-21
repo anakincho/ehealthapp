@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'basewithoutsearch.html' %}
 
 {% block body_block %}
 <form id="user_form" method="post" action="/ehealth_app/profile/"
@@ -12,7 +12,7 @@
                value="{{ user.userprofile.website }}" name="website" type="text"/>
         {% else %}
         <input class="form-control" placeholder="Enter Website" id="id_website" maxlength="254"
-               value="{{ user.userprofile.website }}" name="website" type="text"/>
+               value="" name="website" type="text"/>
         {% endif %}
         </br>
         <label class="btn btn-primary" for="id_picture">

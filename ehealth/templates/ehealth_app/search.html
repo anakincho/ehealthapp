@@ -6,58 +6,77 @@
 
 {% block body_block %}
 
-    <div class="row">
-	<br/>
-	<br/>
-	  <br/>
-			<br/>
-			<br/>
-			<br/>
-        <div class="panel panel-primary">
-            <div class="panel">
-                {% if results %}
-                    <div class="panel-heading">
-                    <h3 class="panel-title">Results</h3>
-					<br/>
-					<p class="list-group-item-text">{{ num_results }} {{ "Results" }}</p>
-                    <!-- Display search results in an ordered list -->
-                    <div class="panel-body">
-                        <div class="list-group">
-                            {% for result in results %}
-								<!-- perhaps another for loop for the readability scores -->
-                                <div class="list-group-item">
-								<!-- Take the values of these items and use them as the elements to submit to the PageForm -->
-								<!-- We need resultTitle and resultURL. Once the user clicks savepage they should be redirected -->
-								<!-- They should be redirected to a page that asks them what category they want to add the page to -->
-								<!-- Once they've selected the category; the page is saved to the database -->
-								<!-- Have a look at the save_page view to see me failing -->
-								<form id = "add_page_form" method= "post" action = "ehealth_app/save_page/">
-									{% csrf_token %}
-                                    <h4 class="list-group-item-heading"><a href="{{ result.link }}" name ="resultTitle" value = {{ result.title }} >{{ result.title }}</a></h4>
-									<p class="list-group-item-text" name = "resultURL" value = {{ result.link }} >{{ result.link }}</p>
-									</br>
-                                    <p class="list-group-item-text">{{ result.summary }}</p>
-				    </br>
-				    <p class = "list-group-item-text">{{result.from}} </p>
-				    <br>
-				    <u>Scores:</u>
-				    <p class = "list-group-item-text" >Flesch Score: {{result.fleschScore}} </p>
-				    <p class = "list-group-item-text">Subjectivity Score: {{result.subjectivityScore}} </p>
-				    <p class = "list-group-item-text">Polarity Score: {{result.polScore}} </p>
-									
-									<!-- Add readability etc scores here as here -->
-					<br>
-					{% if user.is_authenticated %}
-					<button onclick="window.location= '{% url 'save_page' %}';"  class="btn btn-success"> Save Page </button>
-					 {% endif %}
-					 </form> <!-- End Of Form -->
-                                </div>
-				<br>					
-                            {% endfor %}
-			
+<div class="row">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="panel panel-primary">
+        <div class="panel">
+            {% if results %}
+            <div class="panel-heading">
+                <h3 class="panel-title">Results</h3>
+                <br/>
+
+                <p class="list-group-item-text">{{ num_results }} {{ "Results" }}</p>
+                <!-- Display search results in an ordered list -->
+                <div class="panel-body">
+                    <div class="list-group">
+                        {% for result in results %}
+                        <!-- perhaps another for loop for the readability scores -->
+                        <div class="list-group-item">
+                            <!-- Take the values of these items and use them as the elements to submit to the PageForm -->
+                            <!-- We need resultTitle and resultURL. Once the user clicks savepage they should be redirected -->
+                            <!-- They should be redirected to a page that asks them what category they want to add the page to -->
+                            <!-- Once they've selected the category; the page is saved to the database -->
+                            <!-- Have a look at the save_page view to see me failing -->
+                            <form id="add_page_form" method="post" action="{% url 'save_page' %}">
+                                {% csrf_token %}
+                                <h4 class="list-group-item-heading"><a href="{{ result.link }}" name="resultTitle"
+                                                                       value={{ result.title }}>{{ result.title }}</a>
+                                </h4>
+
+                                <p class="list-group-item-text" name="resultURL" value={{ result.link }}>{{ result.link}}</p>
+                                </br>
+                                <p class="list-group-item-text">{{ result.summary }}</p>
+                                </br>
+                                <p class="list-group-item-text">{{result.from}} </p>
+                                <br>
+                                <u>Scores:</u>
+
+                                <p class="list-group-item-text" name="flesch_score">Flesch Score: {{result.fleschScore}} </p>
+
+                                <p class="list-group-item-text" name="subjectivity_score">Subjectivity Score: {{result.subjectivityScore}} </p>
+
+                                <p class="list-group-item-text" name="polarity_score">Polarity Score: {{result.polScore}} </p>
+
+                                <!--Saving the day at the last moment-->
+                                <!--For tutors, lecturer, I know it is a very bad practice to write inline css,
+                                but that was the only fix I found since the display:none from the style.css was not
+                                working on mozilla and was working only on chrome-->
+                                <input type="text" name="polarity_score" value="{{result.polScore}}" style="display:none;">
+                                <input type="text" name="subjectivity_score" value="{{result.subjectivityScore}}" style="display:none;">
+                                <input type="text" name="flesch_score" value="{{result.fleschScore}}" style="display:none;">
+                                <input type="text" name="title" value="{{result.title}}" style="display:none;">
+                                <input type="text" name="url" value="{{result.link}}" style="display:none;">
+                                <!-- -->
+                                <br>
+                                {% if user.is_authenticated %}
+                                    <button type="submit" class="btn btn-success">Save Page</button>
+                                {% endif %}
+                            </form>
+
+                            <!-- End Of Form -->
                         </div>
-			
-			<div class="pagination">
+                        <br>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="pagination">
     				<span class="step-links">
         				{% if results.has_previous %}
             					<a href="{{request.get_full_path }}&page={{ results.previous_page_number }}">previous</a>
@@ -71,11 +90,11 @@
         				    <a href="{{request.get_full_path }}&page={{ results.next_page_number }}">next</a>
         				{% endif %}
     				</span>
-			</div>
                     </div>
-                {% endif %}
                 </div>
+                {% endif %}
             </div>
- </div>
+        </div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
