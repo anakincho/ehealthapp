@@ -100,8 +100,18 @@ def search(request):
 		
 	result_list.sort(key=lambda item:item['polScore'], reverse = False)
 
-    ##paginator = Paginator(result_list, 10)
+    paginator = Paginator(result_list, 10)
     num_results = len(result_list)
+
+    page = request.GET.get('page')
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        results = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        results = paginator.page(paginator.num_pages)
 
 ###################################################################################################
     #CODE FOR READING SCORES with examples!
@@ -139,7 +149,7 @@ def search(request):
 ###################################################################################################
 
 
-    return render(request, 'ehealth_app/search.html', {'result_list': result_list, 'num_results': num_results})
+    return render(request, 'ehealth_app/search.html', {'result_list': result_list, 'num_results': num_results, 'results': results})
 
 
 def terms(request):

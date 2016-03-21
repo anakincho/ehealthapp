@@ -15,22 +15,27 @@
 			<br/>
         <div class="panel panel-primary">
             <div class="panel">
-                {% if result_list %}
+                {% if results %}
                     <div class="panel-heading">
                     <h3 class="panel-title">Results</h3>
 					<br/>
-					<p class="list-group-item-text">{{ num_results }}</p>
-					<p class="list-group-item-text">{{ "Results" }}</p>
+					<p class="list-group-item-text">{{ num_results }} {{ "Results" }}</p>
                     <!-- Display search results in an ordered list -->
                     <div class="panel-body">
                         <div class="list-group">
-                            {% for result in result_list %}
+                            {% for result in results %}
 								<!-- perhaps another for loop for the readability scores -->
                                 <div class="list-group-item">
                                     <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a></h4>
                                     <p class="list-group-item-text">{{ result.summary }}</p>
-									</br>
-									<p class = "list-group-item-text">{{result.from}} </p>
+				    </br>
+				    <p class = "list-group-item-text">{{result.from}} </p>
+				    <br>
+				    <u>Scores:</u>
+				    <p class = "list-group-item-text">Flesch Score: {{result.fleschScore}} </p>
+				    <p class = "list-group-item-text">Subjectivity Score: {{result.subjectivityScore}} </p>
+				    <p class = "list-group-item-text">Polarity Score: {{result.polScore}} </p>
+									
 									<!-- Add readability etc scores here as here -->
 					<br>
 					<button onclick="window.location= '{% url 'save_page' %}';"  class="btn btn-success"> Save Page </button>
@@ -39,7 +44,24 @@
 			<!-- Have some code here to implement adding of pages to favourites -->
 								<!-- set models.title to result.title etc -->
                             {% endfor %}
+			
                         </div>
+			
+			<div class="pagination">
+    				<span class="step-links">
+        				{% if results.has_previous %}
+            					<a href="{{request.get_full_path }}&page={{ results.previous_page_number }}">previous</a>
+        				{% endif %}
+
+        				<span class="current">
+        	    				Page {{ results.number }} of {{ results.paginator.num_pages }}
+        				</span>
+
+        				{% if results.has_next %}
+        				    <a href="{{request.get_full_path }}&page={{ results.next_page_number }}">next</a>
+        				{% endif %}
+    				</span>
+			</div>
                     </div>
                 {% endif %}
                 </div>
