@@ -50,9 +50,7 @@ So far implemented by Carly (2081252C):
 	- edit/delete categories
 	- share ability
 	- new design
-	- Still to do:
-		- ajax
-		- make stuff look better
+	- pagination
 
 So far implemented by Calum (2082101Y, calumyoung95):
 	-Added bing_search.py
@@ -63,5 +61,5 @@ So far implemented by Calum (2082101Y, calumyoung95):
 	-Created medline_search.py half functional (still to be finished)
 	-Created search.html which is redirected to if user searches
 	-Updated medline. Works functionally but the display is not correct
-	-Still to implement: pagination (ew) and a way to toggle APIs
+	-toggle APIs
 	-Its 2:15AM I hate my life
