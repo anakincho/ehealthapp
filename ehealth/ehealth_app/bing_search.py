@@ -61,7 +61,9 @@ def run_BING_query(search_terms):
 			'title': result['Title'],
 			'link': result['Url'],
 			'from': "From:     Bing",
-			'summary': result['Description']})
+			'summary': result['Description'],
+			'content': result['Description']
+			})
 
     # Catch a URLError exception - something went wrong when connecting!
     except urllib2.URLError as e:

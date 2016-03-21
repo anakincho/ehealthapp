@@ -90,8 +90,11 @@ def search(request):
         if 'healthfinderSearch' in api_checked:
             result_list += run_healthfinder_query(query)
 
-
-
+	#for result in result_list:
+		#result['fleschScore'] = fleschScore(result['content'])
+		#result['subjectivityScore'] = subjectivityScore(result['content'])
+		#result['PolScore'] = polarityScore(result['content'])
+		#print result['fleschScore']
 
     ##paginator = Paginator(result_list, 10)
     num_results = len(result_list)

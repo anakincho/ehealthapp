@@ -23,7 +23,8 @@ def run_healthfinder_query(search_terms):
 				'title': result['Title'],
 				'link': result['AccessibleVersion'],
 				'from': "From:     Healthfinder.gov",
-				'summary': result['Sections'][descIndex]['Description']
+				'summary': result['Sections'][0]['Description'],
+				'content': result['Sections'][0]['Content']
 				})
 			
 		
