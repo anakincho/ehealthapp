@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ehealth.settings')
 import django
 django.setup()
 
-from ehealth_app.models import Category, Page
+from ehealth_app.models import Category, Page, User
 
 #Populating function
 #All the data created from here is for testing purposes!
