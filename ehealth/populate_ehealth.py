@@ -19,7 +19,9 @@ def populate():
     # Adds a page to our Diabetes category with all the fields
 	add_page(cat                = diabetes_cat,
 			title              = 'Preventing Diabetes: Questions for the doctor',
-			url                = 'http://healthfinder.gov/HealthTopics/Category/doctor-visits/talking-with-the-doctor/preventing-diabetes-questions-for-the-doctor',
+			url                = 
+'http://healthfinder.gov/HealthTopics/Category/doctor-visits/talking-with-the-doctor/preventing-diabetes-quest
+ions-for-the-doctor',
 			flesch_score       = 12.5,
 			polarity_score     = 10.2,
 			subjectivity_score = 13.6,
@@ -41,11 +43,12 @@ def populate():
 			subjectivity_score = 0.3,
 			shared = True)
 
-    flu_cat = add_cat('Flu', 'jill') #creates a category with name Flu, by the user testUser
+	flu_cat = add_cat('Flu', 'jill') #creates a category with name Flu, by the user testUser
     #adds a page to our Flu category with all the fields
-    add_page(cat                = flu_cat,
+	add_page(cat                = flu_cat,
 			title              = 'Prepare for a Flu Pandemic',
-			url                = 'http://healthfinder.gov/HealthTopics/Category/everyday-healthy-living/safety/prepare-for-a-flu-pandemic',
+			url                = 
+'http://healthfinder.gov/HealthTopics/Category/everyday-healthy-living/safety/prepare-for-a-flu-pandemic',
 			flesch_score       = 8.3,
 			polarity_score     = 7.4,
 			subjectivity_score = 10.8,
@@ -90,8 +93,8 @@ def populate():
 			title              = 'Kaposi's Sarcoma',
 			url                = 'https://www.nlm.nih.gov/medlineplus/kaposissarcoma.html',
 			flesch_score       = 68.77,
-			polarity_score     =  -0.173958333333
-			subjectivity_score =  0.392708333333
+			polarity_score     =  -0.173958333333,
+			subjectivity_score =  0.392708333333,
 			shared = True)
 	
 
