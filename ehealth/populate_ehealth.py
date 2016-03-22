@@ -101,7 +101,7 @@ def populate():
 		for p in Page.objects.filter(category=c):
 			print "- {0} - {1}".format(str(c), str(p))
 
-def add_page(cat, title, url, flesch_score, polarity_score, subjectivity_score, shared):
+def add_page(cat, title, url, flesch_score, polarity_score, subjectivity_score):
 	p = Page.objects.get_or_create(category=cat, title=title)[0]
 	p.url=url
 	p.flesch_score = flesch_score
@@ -111,7 +111,7 @@ def add_page(cat, title, url, flesch_score, polarity_score, subjectivity_score, 
 	p.save()
 	return p
 
-def add_cat(name, user, shared):
+def add_cat(name, user):
 	c = Category.objects.get_or_create(name=name, user=user)[0]
 	c.shared = shared
 	return c
