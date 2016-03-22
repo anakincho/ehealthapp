@@ -19,9 +19,7 @@ def populate():
     # Adds a page to our Diabetes category with all the fields
 	add_page(cat                = diabetes_cat,
 			title              = 'Preventing Diabetes: Questions for the doctor',
-			url                = 
-'http://healthfinder.gov/HealthTopics/Category/doctor-visits/talking-with-the-doctor/preventing-diabetes-quest
-ions-for-the-doctor',
+			url                = 'http://healthfinder.gov/HealthTopics/Category/doctor-visits/talking-with-the-doctor/preventing-diabetes-questions-for-the-doctor',
 			flesch_score       = 12.5,
 			polarity_score     = 10.2,
 			subjectivity_score = 13.6,
