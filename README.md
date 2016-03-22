@@ -58,8 +58,10 @@ So far implemented by Calum (2082101Y, calumyoung95):
 	-Added search view to views.py
 	-Added search url to urls.py
 	-Updated the base template to submit search form
-	-Created medline_search.py half functional (still to be finished)
+	-Added medline_search.py
+	-Used the readability files Niki set up to get appropriate values for each page
 	-Created search.html which is redirected to if user searches
-	-Updated medline. Works functionally but the display is not correct
-	-toggle APIs
-	-Its 2:15AM I hate my life
+	-Population Script
+	-toggle APIs with checkboxes
+	-Added feature where user can only save pages if he/she is logged in
+	-Moral Support
