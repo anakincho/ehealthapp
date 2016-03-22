@@ -15,14 +15,14 @@ def populate():
 	
 	add_user('jill','jillvalentine@hotmail.co.uk', 'jill')
 
-    diabetes_cat = add_cat('Diabetes', 'jill') #creates a category with name Diabetes, by the user testUser
+	diabetes_cat = add_cat('Diabetes', 'jill') #creates a category with name Diabetes, by the user testUser
     # Adds a page to our Diabetes category with all the fields
-    add_page(cat                = diabetes_cat,
+	add_page(cat                = diabetes_cat,
 			title              = 'Preventing Diabetes: Questions for the doctor',
 			url                = 'http://healthfinder.gov/HealthTopics/Category/doctor-visits/talking-with-the-doctor/preventing-diabetes-questions-for-the-doctor',
 			flesch_score       = 12.5,
 			polarity_score     = 10.2,
-			subjectivity_score = 13.6
+			subjectivity_score = 13.6,
 			shared = True)
 			 
 	add_page(cat                = diabetes_cat,
@@ -30,7 +30,7 @@ def populate():
 			url                = 'http://diabetes.about.com/od/whatisdiabetes/p/whatisdiabetes.html',
 			flesch_score       = 60.31,
 			polarity_score     = -0.5,
-			subjectivity_score = 0.3
+			subjectivity_score = 0.3,
 			shared = False)
 			 
 	add_page(cat                = diabetes_cat,
@@ -38,7 +38,7 @@ def populate():
 			url                = 'https://www.nlm.nih.gov/medlineplus/diabetesinsipidus.html',
 			flesch_score       = 71.31,
 			polarity_score     = -0.5,
-			subjectivity_score = 0.3
+			subjectivity_score = 0.3,
 			shared = True)
 
     flu_cat = add_cat('Flu', 'jill') #creates a category with name Flu, by the user testUser
@@ -48,7 +48,7 @@ def populate():
 			url                = 'http://healthfinder.gov/HealthTopics/Category/everyday-healthy-living/safety/prepare-for-a-flu-pandemic',
 			flesch_score       = 8.3,
 			polarity_score     = 7.4,
-			subjectivity_score = 10.8
+			subjectivity_score = 10.8,
 			shared = True)
 			 
 	add_page(cat                = flu_cat,
@@ -56,7 +56,7 @@ def populate():
 			url                = 'http://www.emedicinehealth.com/flu_in_adults/article_em.html',
 			flesch_score       = 95.17,
 			polarity_score     = -0.6,
-			subjectivity_score = 1.0
+			subjectivity_score = 1.0,
 			shared = True)
 
 	cancer_cat = add_cat('Cancer', 'bob')
@@ -65,7 +65,7 @@ def populate():
 			url                = 'https://www.nlm.nih.gov/medlineplus/mammography.html',
 			flesch_score       = 77.23,
 			polarity_score     =  -0.0557142857143,
-			subjectivity_score = 0.417619047619
+			subjectivity_score = 0.417619047619,
 			shared = False)
 	
 	add_page(cat                = cancer_cat,
@@ -73,7 +73,7 @@ def populate():
 			url                = 'http://www.breastcancerkent.org.uk/',
 			flesch_score       = 80.28,
 			polarity_score     = -0.25,
-			subjectivity_score = 0.25
+			subjectivity_score = 0.25,
 			shared = False)
 	
 	hiv_cat = add_cat('HIV', 'bob')
@@ -82,7 +82,7 @@ def populate():
 		url                = 'https://simple.wikipedia.org/wiki/HIV',
 		flesch_score       = 43.06,
 		polarity_score     = 0.0,
-		subjectivity_score = -0.1
+		subjectivity_score = -0.1,
 		shared = True)
 	
 	
