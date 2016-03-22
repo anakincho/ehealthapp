@@ -97,9 +97,9 @@ def populate():
 	
 
     # Print out what we have added to the user.
-    for c in Category.objects.all():
-        for p in Page.objects.filter(category=c):
-            print "- {0} - {1}".format(str(c), str(p))
+	for c in Category.objects.all():
+		for p in Page.objects.filter(category=c):
+			print "- {0} - {1}".format(str(c), str(p))
 
 def add_page(cat, title, url, flesch_score, polarity_score, subjectivity_score, shared):
 	p = Page.objects.get_or_create(category=cat, title=title)[0]
