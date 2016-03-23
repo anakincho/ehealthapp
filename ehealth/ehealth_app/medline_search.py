@@ -1,5 +1,5 @@
 import urllib2, urllib
-from xml.dom import minidom
+from BeautifulSoup import BeautifulSoup as Soup
 from HTMLParser import HTMLParser
 
 
@@ -27,35 +27,33 @@ ret_type = '&rettype=brief'
 def run_medline_query(search_terms):
 	term = "{0}".format(search_terms)
 	term = urllib.quote(term)
-	none = 'none'
+	
 	
 	results = []
 	
 	url= (base_url + term + ret_type)
 	
-	dom = minidom.parse(urllib.urlopen(url)) 
-	documents = dom.getElementsByTagName('document')
+	soup = Soup(urllib.urlopen(url)) 
 	
-	for document in documents:
-		contents = document.getElementsByTagName('content')
-		for item in contents:
-			actualContent = item.firstChild.nodeValue
-			if item.getAttribute('name') == 'title':
-				title = strip_tags(actualContent)
-			if item.getAttribute('name') == 'snippet':
-				summary = strip_tags(actualContent)
-			if item.getAttribute('name') == 'FullSummary':
-				content = strip_tags(actualContent)
-		
+	for document in soup.findAll('document'):
+		contents = document.findAll('content')
+		for content in contents:
+			if content.get('name') == 'title':
+				taggedTitle = content.string
+				title = strip_tags(taggedTitle)
+			if content.get('name') == 'snippet':
+				taggedSnippet = content.string
+				snippet = strip_tags(taggedSnippet)
+			if content.get('name') == 'FullSummary':
+				taggedSummary = content.string
+				summary = strip_tags(taggedSummary)
 		results.append({
-		'title' : title,
-		'link' : document.getAttribute('url'),
-		'summary': summary,
-		'content':  content,
+		'title': title,
+		'link': document.get('url'),
+		'summary': snippet,
+		'content': summary,
 		'from' : 'From:     MedlinePlus'
-		})	
-		
-			
-			
-		
+		})
+				
+	
 	return results
