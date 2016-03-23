@@ -47,7 +47,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 <li><button onclick="window.location= '{% url 'add_category' %}';"  class="btn btn-success">Add a New Category</button></a></li>
-		<li></li>
+		<li>&nbsp;</li>
                 <li><button onclick="window.location= '{% url 'auth_logout' %}?next=/ehealth_app/';"  class="btn btn-success">Logout</button></li>
 		<li> &nbsp; </li>
                 <li><button onclick="window.location= '{% url 'profile' %}';"  class="btn btn-success">Profile</button></a></li>
