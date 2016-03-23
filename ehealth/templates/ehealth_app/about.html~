@@ -11,6 +11,19 @@
             <div>
             <p></strong>Welcome to Ehealth, where we provide the "best" search engine for health!</p>
 
+	    <p> Ehealth is an app designed to help people find articles related to medical conditions. Users are able to: </p>
+		<ul>
+			<li> Search for articles </li>
+			<li> Create an account </li>
+			<li> Create categories </li>
+			<li> Save pages to categories</li>
+		</ul>
+	    <p> Designed by Group D, Lab Group 8: </p>
+		<ul>
+			<li> Nikolay Ivanov </li>
+			<li> Carly Crawford </li>
+			<li> Calum Young </li>
+		</ul>
             <img  width="90" height="100" src="{% static "images/pigeon.jpg" %}" alt="Picture of Pigeon" /> <!-- New line -->
             </div>
 {% endblock %}
