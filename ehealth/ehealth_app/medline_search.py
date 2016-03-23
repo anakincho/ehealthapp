@@ -44,6 +44,7 @@ def run_medline_query(search_terms):
 			if content.get('name') == 'snippet':
 				taggedSnippet = content.string
 				snippet = strip_tags(taggedSnippet)
+				snippet= strip_tags(snippet)
 			if content.get('name') == 'FullSummary':
 				taggedSummary = content.string
 				summary = strip_tags(taggedSummary)
