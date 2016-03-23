@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 {% load static %}
 <html lang="en">
 <head>
@@ -43,11 +43,11 @@
             <a class="navbar-brand" href="/ehealth_app/"> <img src="/media/logo.png" height ="60" alt="ehealth logo"></a>
         </div>
         <div class="navbar-collapse collapse">
+	    <br>
             <ul class="nav navbar-nav navbar-right">
-		<br>
                 {% if user.is_authenticated %}
                 <li><button onclick="window.location= '{% url 'add_category' %}';"  class="btn btn-success">Add a New Category</button></a></li>
-		<li> &nbsp; </li>
+		<li>&nbsp;</li>
                 <li><button onclick="window.location= '{% url 'auth_logout' %}?next=/ehealth_app/';"  class="btn btn-success">Logout</button></li>
 		<li> &nbsp; </li>
                 <li><button onclick="window.location= '{% url 'profile' %}';"  class="btn btn-success">Profile</button></a></li>
@@ -57,7 +57,7 @@
 		<li> &nbsp; </li>
                     {% endif %}
                 {% else %}
-                <li><button onclick="window.location= '{% url 'registration_register' %}';"  class="btn btn-success">Register Here</h3></button></li>
+                <li><button onclick="window.location= '{% url 'registration_register' %}';"  class="btn btn-success">Register Here</button></li>
 `		<li> &nbsp; </li>
                 <li><button onclick="window.location= '{% url 'auth_login' %}';"  class="btn btn-success">Login</button></li>
                 {% endif %}
@@ -65,7 +65,6 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-left" >
-		<BR>
 		<li>&nbsp; &nbsp; </li>
                 <li><button onclick="window.location= '{% url 'index' %}';"  class="btn btn-success">Home</button> </li>
 		<li>&nbsp; </li>
@@ -81,14 +80,14 @@
         {% block side_block %}
 	{% if categories %}
 		<div class="panel panel-success">
-        		<div class="panel-heading">
-                		<h3 class="panel-title" align="center"><strong>Categories</strong></h3>
+        		<div class="panel-heading" align=center>
+                		<h3 class="panel-title"><strong>Categories</strong></h3>
                 	</div>
         	</div>
-        	<ul class="list-group" align="center">
+        	<ul class="list-group">
             		{% for category in categories %}
             			{% if category.shared %} <!--If the creator of the category has shared that category-->
-                		<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+                		<li class="list-group-item" align="center"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
             			{% endif %}
             		{% endfor %}
         	</ul>
@@ -96,15 +95,18 @@
 		{% if user.is_authenticated %}
 		<div class="panel panel-success">
         		<div class="panel-heading">
-                		<h3 class="panel-title" align="center"><strong>Private Categories</strong></h3>
+                		<h3 class="panel-title"><strong>Private Categories</strong></h3>
                 	</div>
         	</div>
-		<ul class="list-group" align="center">
+		<ul class="list-group">
 		
             		{% for category in categories %}
             			{% if category.user == user.username %} 
 					{% if category.shared == 0 %}
-                			<li class="list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>         				{% endif %}
+                			<li class="list-group-item" align="center">
+						<a href="{% url 'category'  category.slug %}"> {{ category.name }}</a>
+					</li>         				
+					{% endif %}
 				{% endif %}
             		{% endfor %}
         	</ul>
@@ -116,13 +118,11 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main">
             <div>
-		<div class="col-md-offset-3">
-  			
-		</div>
+		
                 {% block body_block %}{% endblock %}
-                <section id="footer">
+                <section id="footer"><h6>
 			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5"><br> <p id=foot>Ehealth™ <a href="{% url 'tandc' %}">T&C</a></p></div>
-                </section>
+                </h6></section>
             </div>
         </div>
     </div>
