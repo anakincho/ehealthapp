@@ -142,9 +142,9 @@
     			</form>
 		</div>
                 {% block body_block %}{% endblock %}
-                <section id="footer"><h6>
+                <div id="footer">
 			<div class="navbar navbar-fixed-bottom col-md-2 col-md-offset-5"><br> <p id=foot>Ehealth™ <a href="{% url 'tandc' %}">T&C</a></p></div>
-                </h6></section>
+                </div>
             </div>
         </div>
     </div>
