@@ -35,13 +35,12 @@
                             <!-- Have a look at the save_page view to see me failing -->
                             <form id="add_page_form" method="post" action="{% url 'save_page' %}">
                                 {% csrf_token %}
-                                <h4 class="list-group-item-heading"><a href="{{ result.link }}" name="resultTitle"
-                                                                       value={{ result.title }}>{{ result.title }}</a>
+                                <h4 class="list-group-item-heading"><a href="{{ result.link }}" name="resultTitle">{{ result.title|striptags }}</a>
                                 </h4>
 
-                                <p class="list-group-item-text" name="resultURL" value={{ result.link }}>{{ result.link}}</p>
+                                <p class="list-group-item-text" name="resultURL" value={{ result.link }}>{{ result.link|striptags}}</p>
                                 </br>
-                                <p class="list-group-item-text">{{ result.summary }}</p>
+                                <p class="list-group-item-text">{{ result.summary|striptags }}</p>
                                 </br>
                                 <p class="list-group-item-text">{{result.from}} </p>
                                 <br>
