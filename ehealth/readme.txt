@@ -1,5 +1,6 @@
 Set Up:
 
+-clone https://github.com/anakincho/ehealthapp
 -Launch cmd or your preferred console.
 -Go onto a virtual environment.
 -Navigate to correct directory "Workspace\ehealthapp\ehealth"
@@ -9,7 +10,10 @@ Set Up:
 -Go to "http://127.0.0.1:8000/ehealth_app/"
 -Enjoy or detest our project.
 
-
+After population script users available to login in with:
+    username: jill password: jill
+    username: joe password: joe
+    username: jim password: jim
 
 Project Specifications:
 
@@ -25,14 +29,49 @@ source.
 
 -Once he/she has done so, they can create categories and add pages to them.
 
--The user can choose to make his page private 
+-The user can choose to make his created category or saved page private
+
+-The user can edit or delete their created categories
 
 
 
 Work Distribution:
 
 
-Done by Niki -: 
+Done by Niki -:
+- Models (Categories, Pages) added all fields
+- Made Categories, Pages sharable (a user can choose if a category/page is to be shared or no)
+- Views
+- Urls
+- Some of the templates
+- Forms
+- Bootstrap beginning
+- User profiles (a user can set up their profile, including profile pic and website, also important thing is that the implementation allows the user to edit his profile!)
+- It is 2 a.m so I am not sure what else but I am sure I am missing half the stuff
+
+
+- Implemented all the scores (flesh, subjectivity, polarity)
+- Wrote down the pseudo code on how it should be implemented in the view
+- fixed all the inline and internal css now is rewritten in an external file
+- removed the internal js and rewrote it in external script.js file
+- implemented the autocomplete feature with help from Carly for the suggestion list
+- fixed some bugs and did some validation
+- NOTE IMPORTANT ! team do pip install textstat and pip install textblob in your VE
+
+- Implemented save pages functionality,
+- fixed some major bugs
+- fixed some html bugs
+- wrote comments on views implemented
+
+- implemented jquery validation on add category, add page,
+- fixed styling on some of the templates (bootstrap was not added previously)
+- removed some inline css
+- fixed the healthfinder API not to break if there are no results or a bad keyword
+- fixed medline API to work on pythonanywhere
+- fixed population script, now working properly and populating the database as intended
+- added new user to the population script and added extra fields for 'shared, user' on pages and categories
+- fixed now add page and add category return to the homepage after submiting
+- fixed other small bugs
 
 Done by Carly -: 
 

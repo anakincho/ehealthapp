@@ -1,4 +1,8 @@
-"# ehealthapp" 
+"# ehealthapp"
+
+For Tutors, Lecturer if you are reading this, please reffer to the readme.txt file inside the ehealth
+folder above. The specifications and work distribution are described there, this file
+was initially used by team members, the official readme.txt is found in: https://github.com/anakincho/ehealthapp/blob/master/ehealth/readme.txt
 
 IMPORTANT NOTE!!!! when installing requirements, ESPECIALLY DJANGO-REGISTRATION-REDUX
 
@@ -39,6 +43,16 @@ So far implemented by Niki (git username: anakincho, student id: 2115451i):
 	- fixed some major bugs
 	- fixed some html bugs
 	- wrote comments on views implemented
+
+	- implemented jquery validation on add category, add page,
+	- fixed styling on some of the templates (bootstrap was not added previously)
+	- removed some inline css
+	- fixed the healthfinder API not to break if there are no results or a bad keyword
+	- fixed medline API to work on pythonanywhere
+	- fixed population script, now working properly and populating the database as intended
+	- added new user to the population script and added extra fields for 'shared, user' on pages and categories
+	- fixed now add page and add category return to the homepage after submiting
+	- fixed other small bugs
 
 So far implemented by Carly (2081252C):
 	- updated base to contain categories sidebar and search bar like wireframes

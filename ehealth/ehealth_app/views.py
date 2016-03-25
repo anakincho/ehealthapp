@@ -17,6 +17,18 @@ from ehealth_app.scores import polarityScore
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
+
+# not used since no time was left to finish it
+def check_cat(request):
+
+    if request.method == 'GET':
+        cat_name = request.GET['category_name']
+        if Category.objects.filter(name=cat_name).count() > 0:
+            return HttpResponse(True)
+
+    return False
+
+
 @login_required
 def add_page(request):
     #get the username of the current user
@@ -42,7 +54,7 @@ def add_page(request):
     else:
         p.shared = False
     p.save()
-    return render(request, 'ehealth_app/index.html', {})
+    return index(request)
 
 def save_page(request):
 
@@ -305,7 +317,7 @@ def category(request, category_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'ehealth_app/categories.html', context_dict)
 
-
+@login_required
 def add_category(request):
     # In order to record which user has created the category!
     if request.user.is_authenticated():
@@ -315,20 +327,33 @@ def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
 
-        # Have we been provided with a valid form?
-        if form.is_valid():
-            note = form.save(commit=True)
-            print note.name
-            note.user = username
-            # Save the new category to the database.
-            note.save()
+        # # Have we been provided with a valid form?
+        # if form.is_valid():
+        #     note = form.save(commit=True)
+        #     print note.name
+        #     note.user = username
+        #     # Save the new category to the database.
+        #     note.save()
+        #
+        #     # Now call the index() view.
+        #     # The user will be shown the homepage.
+        #     return index(request)
+        # else:
+        #     # The supplied form contained errors - just print them to the terminal.
+        #     print form.errors
 
-            # Now call the index() view.
-            # The user will be shown the homepage.
-            return index(request)
+        if request.POST.getlist('shared[]'):
+            shared = True
         else:
-            # The supplied form contained errors - just print them to the terminal.
-            print form.errors
+            shared = False
+
+        c = Category.objects.get_or_create(name=request.POST.get("name"), user=username, shared=shared)[0]
+
+        c.save()
+
+        return index(request)
+
+
     else:
         # If the request was not a POST, display the form to enter details.
         form = CategoryForm()
@@ -342,7 +367,7 @@ def add_category(request):
     # Render the form with error messages (if any).
     return render(request, 'ehealth_app/add_category.html', context_dict)
 
-
+@login_required
 def edit_category(request, category_name_slug):
     context_dict = {}
 

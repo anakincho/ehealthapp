@@ -7,32 +7,32 @@
 {% block body_block %}
         <h1>Save a page</h1>
 
-        <form id="category_form" method="post" action="{% url 'add_page' %}">
+        <form id="page_form" method="post" action="{% url 'add_page' %}">
             {% csrf_token %}
             <div class="col-xs-4">
                  <label for="id_title">Title</label>
-                <input class="form-control uneditable-input" disabled id="id_title" maxlength="254"
+                <input class="form-control uneditable-input" id="id_title" maxlength="254"
                    value="{{ title|striptags }}" name="title" type="text"/>
                 <label for="id_url">Url</label>
-                <input class="form-control" id="id_url" disabled maxlength="254"
+                <input class="form-control" id="id_url" maxlength="254" readonly
                    value="{{ url }}" name="url" type="text"/>
                 <label for="id_flesch_score">Flesch Score</label>
-                <input class="form-control" id="id_flesch_score" disabled maxlength="254"
+                <input class="form-control" id="id_flesch_score" maxlength="254" readonly
                    value="{{ flesch_score }}" name="flesch_score" type="text"/>
                 <label for="id_subjectivity_score">Subjectivity Score</label>
-                <input class="form-control" id="id_subjectivity_score" disabled maxlength="254"
+                <input class="form-control" id="id_subjectivity_score" maxlength="254" readonly
                    value="{{ subjectivity_score }}" name="subjectivity_score" type="text"/>
                 <label for="id_polarity_score">Polarity Score</label>
-                <input class="form-control" id="id_polarity_score" disabled maxlength="254"
+                <input class="form-control" id="id_polarity_score" maxlength="254" readonly
                    value="{{ polarity_score }}" name="polarity_score" type="text"/>
                 <label for="id_category">Category</label>
                 <input class="form-control" id="id_category" maxlength="254"
-                   placeholder="Please enter a category name..." name="category" type="text"/>
+                   placeholder="Please enter a category name..." name="category" type="text"/> Please type the correct name if the category exists(eg: Diabetes instead of diabetes)!
                 <div class="checkbox">
                     <label><input type="checkbox" name="shared[]" value="1">Do you want this page to be visible to other users?</label>
                 </div>
                 </br>
-                <input class="btn btn-success" type="submit" name="submit" value="Save page" />
+                <input class="btn btn-success" id="cat_form_submit" type="submit" name="submit" value="Save page" />
             </div>
 
 

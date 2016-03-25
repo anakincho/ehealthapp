@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'basewithoutsearch.html' %}
 
 {% load staticfiles %}
 
@@ -8,13 +8,25 @@
     <h1>{{ category_name }}</h1>
     {% if category %}
         {% if pages %}
-        <ul class="list-group">
+        <br class="list-group">
                 {% for page in pages %}
                     {% if page.shared %}
-                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></br><a style="color:green;" href ="{{ page.url }}">{{ page.url }}</a></li>
+                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a>
+                            </br>
+                            <a href ="{{ page.url }}">{{ page.url }}</a>
+                            </br>
+                            <p>Flesh Score: <strong>{{ page.flesch_score }}</strong> Subjectivity Score:<strong>{{ page.subjectivity_score }}</strong> Polarity Score:<strong>{{ page.polarity_score }}</strong></p>
+                        </li>
                     {% else %}
                     {% if page.user == user.username %}
-                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></br><a style="color:green;" href ="{{ page.url }}">{{ page.url }}</a></li>
+                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a>
+                            </br>
+                            <a href ="{{ page.url }}">{{ page.url }}</a>
+                            </br>
+                            <p>Flesh Score: <strong>{{ page.flesch_score }}</strong> Subjectivity Score:<strong>{{ page.subjectivity_score }}</strong> Polarity Score:<strong>{{ page.polarity_score }}</strong></p>
+
+                        </li>
+
                     {% endif %}
                     {% endif %}
                 {% endfor %}
@@ -25,9 +37,10 @@
 	<br>
 	<br>
 	{% if category.user == user.username %}
-	<button onclick="window.location= '{% url 'edit_category' category.slug %}';">Edit Category</button>
-	<br>
-	<button onclick="window.location= '{% url 'delete_category' category.slug %}';">Delete Category</button>
+	<button class="btn btn-primary" onclick="window.location= '{% url 'edit_category' category.slug %}';">Edit Category</button>
+	</br>
+	</br>
+	<button class="btn btn-danger" onclick="window.location= '{% url 'delete_category' category.slug %}';">Delete Category</button>
 	{% endif %}
         {% else %}
                  The specified category {{ category_name }} does not exist!

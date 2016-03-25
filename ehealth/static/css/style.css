@@ -9,6 +9,10 @@
         padding-top: 0;
 }
 
+.error{
+    border: solid red 1px;
+}
+
 #body{
   padding-top: 80px;
   background-color: #EDEDED;

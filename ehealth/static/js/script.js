@@ -1,6 +1,5 @@
 $(document).ready(function () {
     dataQ = $("#search").val();
-    console.log("yay?");
     /*$("#search").autocomplete({
             type: 'GET',
             url: "search_autocomplete/",
@@ -23,5 +22,30 @@ $(document).ready(function () {
     //Using jquery to autoComplete the search query
     $("#search").autocomplete({source:autoComplete});
 
+    //Used in order to validate that a category name will be input when adding a new page
+    $("#page_form").on("submit",function(){
+        var cat_name = $("#id_category").val();
+        if(!cat_name){
+            $("#id_category").css("border","1px solid red");
+            alert("Please enter a category name!");
+            return false;
+        }
+        else return true;
+
+    });
+
+    $("#category_form").on("submit",function(){
+        var cat_name = $("#id_name").val();
+        if(!cat_name){
+            $("#id_name").css("border","1px solid red");
+            alert("Please enter a category name!");
+            return false;
+        }
+        else return true;
+
+    });
+
+
 
 });
+

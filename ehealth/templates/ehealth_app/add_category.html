@@ -8,19 +8,18 @@
         <h1>Add a Category</h1>
 
         <form id="category_form" method="post" action="/ehealth_app/add_category/">
-
             {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
+            <div class="col-xs-4">
+                 <label for="id_name">Name</label>
+                <input class="form-control" id="id_name" maxlength="254"
+                    name="name" type="text" placeholder="Please make sure that the category does not exist already!"/>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="shared[]" value="1">Do you want this category to be visible to other users?</label>
+                </div>
+                </br>
+                <input class="btn btn-success" type="submit" name="submit" value="Create Category" />
 
-            {% for field in form.visible_fields %} <!--For Carly, use the registration or login profile as reference on how to do this-->
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-
-            <input type="submit" name="submit" value="Create Category" />
+            </div>
         </form>
 {% endblock %}
 
