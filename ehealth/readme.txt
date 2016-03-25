@@ -34,55 +34,68 @@ source.
 -The user can edit or delete their created categories
 
 
+For pythoanywhere, because of them blocking healthfinder, healthfinder is not available on the pythonanywhere website.
+On the local server of this project, all 3 of the API's work!
+
 
 Work Distribution:
 
 
 Done by Niki -:
-- Models (Categories, Pages) added all fields
-- Made Categories, Pages sharable (a user can choose if a category/page is to be shared or no)
-- Views
-- Urls
-- Some of the templates
-- Forms
-- Bootstrap beginning
-- User profiles (a user can set up their profile, including profile pic and website, also important thing is that the implementation allows the user to edit his profile!)
-- It is 2 a.m so I am not sure what else but I am sure I am missing half the stuff
+    - Models (Categories, Pages) added all fields
+    - Made Categories, Pages sharable (a user can choose if a category/page is to be shared or no)
+    - Views
+    - Urls
+    - Some of the templates
+    - Forms
+    - Bootstrap beginning
+    - User profiles (a user can set up their profile, including profile pic and website, also important thing is that the implementation allows the user to edit his profile!)
+    - It is 2 a.m so I am not sure what else but I am sure I am missing half the stuff
 
 
-- Implemented all the scores (flesh, subjectivity, polarity)
-- Wrote down the pseudo code on how it should be implemented in the view
-- fixed all the inline and internal css now is rewritten in an external file
-- removed the internal js and rewrote it in external script.js file
-- implemented the autocomplete feature with help from Carly for the suggestion list
-- fixed some bugs and did some validation
-- NOTE IMPORTANT ! team do pip install textstat and pip install textblob in your VE
+    - Implemented all the scores (flesh, subjectivity, polarity)
+    - Wrote down the pseudo code on how it should be implemented in the view
+    - fixed all the inline and internal css now is rewritten in an external file
+    - removed the internal js and rewrote it in external script.js file
+    - implemented the autocomplete feature with help from Carly for the suggestion list
+    - fixed some bugs and did some validation
+    - NOTE IMPORTANT ! team do pip install textstat and pip install textblob in your VE
 
-- Implemented save pages functionality,
-- fixed some major bugs
-- fixed some html bugs
-- wrote comments on views implemented
+    - Implemented save pages functionality,
+    - fixed some major bugs
+    - fixed some html bugs
+    - wrote comments on views implemented
 
-- implemented jquery validation on add category, add page,
-- fixed styling on some of the templates (bootstrap was not added previously)
-- removed some inline css
-- fixed the healthfinder API not to break if there are no results or a bad keyword
-- fixed medline API to work on pythonanywhere
-- fixed population script, now working properly and populating the database as intended
-- added new user to the population script and added extra fields for 'shared, user' on pages and categories
-- fixed now add page and add category return to the homepage after submiting
-- fixed other small bugs
+    - implemented jquery validation on add category, add page,
+    - fixed styling on some of the templates (bootstrap was not added previously)
+    - removed some inline css
+    - fixed the healthfinder API not to break if there are no results or a bad keyword
+    - fixed medline API to work on pythonanywhere
+    - fixed population script, now working properly and populating the database as intended
+    - added new user to the population script and added extra fields for 'shared, user' on pages and categories
+    - fixed now add page and add category return to the homepage after submiting
+    - fixed other small bugs
 
-Done by Carly -: 
+Done by Carly -:
+    - updated base to contain categories sidebar and search bar like wireframes
+	- had to edit some views to get this to show but everything appears to be working fine
+	- removed search bar from login and registration pages
+	- used JQuery for registration form validation
+	- Updated about page to contain information about app and team
+	- Put up a terms and conditions page
+	- edit/delete categories
+	- share ability
+	- new design
+	- pagination
 
 Done by Calum -:
--Entire functionality for the search. Including what the user sees.
--The search template with the exception of pagination.
--Used the ratings methods for Readability, Polarity and Subjectivity to scan the content of the document getting the
- different scores
--Checkboxes to select API with accompanying javascript files.
--Population Script
--Restricted adding a page to logged in users
--Attempted add a page to category section but couldn't figure it out (Niki solved the problem)
--Moral support
+    -Entire functionality for the search. Including what the user sees.
+    -The search template with the exception of pagination.
+    -Used the ratings methods for Readability, Polarity and Subjectivity to scan the content of the document getting the
+     different scores
+    -Checkboxes to select API with accompanying javascript files.
+    -Population Script
+    -Restricted adding a page to logged in users
+    -Attempted add a page to category section but couldn't figure it out (Niki solved the problem)
+    -Moral support
  
