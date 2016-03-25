@@ -5,3 +5,4 @@ nltk==3.2
 Pillow==3.1.1
 textblob==0.11.1
 textstat==0.2
+BeautifulSoup==3.2.1
